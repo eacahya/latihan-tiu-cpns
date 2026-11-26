@@ -379,7 +379,7 @@ function watermark(){
 async function loadPaket(){
   try{
     const d = await api({ action:'paket' });
-    PAKET = d.paket;
+    PAKET = d.paket.filter(p => p.tipe !== 'SIM');
     let grp = '';
     $('plist').innerHTML = PAKET.map(p => { const g = p.tipe === 'TKP' ? 'Tes Karakteristik Pribadi (TKP)' : 'Tes Wawasan Kebangsaan (TWK)';
       const head = g !== grp ? `<div class="pgroup">${g}</div>` : ''; grp = g; return head + `<button type="button" class="pitem" role="radio" aria-checked="false" data-i="${p.i}"><span class="dot"></span>
