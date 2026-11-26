@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>CAT Latihan TWK CPNS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+
+/* Tata letak: ruang ujian CAT — panel soal di kiri, peta nomor soal di kanan; satu layar per tahap (beranda → ujian → hasil) */
+:root{
+  --bg:#F6F3F4; --surface:#FFFFFF; --tint:#F3E9ED; --ink:#25161C; --muted:#6C5C63; --line:#E3D8DC;
+  --brand:#7A1F33; --brand-2:#5E1727; --on-brand:#FFFFFF; --gold:#A87522; --gold-soft:#F6E7C8;
+  --ok:#2C6A55; --ok-soft:#DDEFE7; --bad:#B23838; --bad-soft:#F7E0E0; --skip:#8A7D83; --skip-soft:#ECE6E8;
+  --shadow:0 1px 2px rgba(60,20,35,.06),0 6px 20px rgba(60,20,35,.06);
+  --f-body:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-num:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#161013; --surface:#20181C; --tint:#2B1F25; --ink:#F2E9EC; --muted:#B5A5AC; --line:#3A2D33;
+  --brand:#C9566F; --brand-2:#E0798F; --on-brand:#1A0F13; --gold:#E0B25A; --gold-soft:#3A2F1C;
+  --ok:#62B898; --ok-soft:#1D3229; --bad:#E57A7A; --bad-soft:#3A2022; --skip:#9C8F95; --skip-soft:#2C2427;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161013; --surface:#20181C; --tint:#2B1F25; --ink:#F2E9EC; --muted:#B5A5AC; --line:#3A2D33;
+  --brand:#C9566F; --brand-2:#E0798F; --on-brand:#1A0F13; --gold:#E0B25A; --gold-soft:#3A2F1C;
+  --ok:#62B898; --ok-soft:#1D3229; --bad:#E57A7A; --bad-soft:#3A2022; --skip:#9C8F95; --skip-soft:#2C2427;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25); color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--brand-2)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--brand-2);color:#fff}
+:root[data-theme="dark"] .top{background:#2A1A20}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .top{background:#2A1A20}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body::before{background:#2A1A20}}
+:root[data-theme="dark"] body::before{background:#2A1A20}
+.top .wrap{display:flex;align-items:center;gap:14px;padding-block:10px;min-height:58px}
+.mark{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:#C9962B;color:#2A0E16;font-weight:800;font-size:13px;letter-spacing:.02em;flex:none}
+.top-title{min-width:0;flex:1}
+.top-title b{display:block;font-size:15px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-title span{display:block;font-size:12px;opacity:.78;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.timer{font-family:var(--f-num);font-weight:700;font-size:20px;letter-spacing:.04em;padding:6px 12px;border-radius:9px;background:rgba(255,255,255,.12);font-variant-numeric:tabular-nums;flex:none}
+.timer.low{background:#C83A3A;color:#fff}
+
+/* beranda */
+.home{padding-block:28px 48px;display:grid;gap:22px}
+.intro{display:grid;gap:6px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+h1{font-size:clamp(26px,4vw,36px);line-height:1.15;margin:0;font-weight:800;text-wrap:balance;letter-spacing:-.01em}
+.lede{margin:0;color:var(--muted);max-width:62ch}
+.namebox{display:grid;gap:6px;max-width:460px}
+.namebox label{font-weight:600;font-size:14px}
+.namebox input{padding:11px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font-size:16px}
+.namebox input:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 22%,transparent)}
+.hint{font-size:13px;color:var(--muted)}
+.hint.err{color:var(--bad);font-weight:600}
+.pkgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.pkg{display:grid;gap:12px;text-align:left;padding:20px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
+.pkg:hover{border-color:var(--brand);transform:translateY(-2px)}
+.pkg .no{font-family:var(--f-num);font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.08em}
+.pkg h3{margin:0;font-size:20px;line-height:1.2}
+.pkg p{margin:0;color:var(--muted);font-size:14px}
+.pkg .meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;background:var(--tint);font-size:12.5px;font-weight:600;color:var(--ink)}
+.pkg .go{justify-self:start;margin-top:2px;padding:9px 16px;border-radius:9px;background:var(--brand);color:var(--on-brand);font-weight:700;font-size:14px}
+.pkg .resume{font-size:12.5px;font-weight:700;color:var(--gold)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:16px 18px;border-radius:12px;background:var(--tint)}
+.rules div{font-size:13.5px}
+.rules b{display:block;font-size:14px}
+.by{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+
+/* ujian */
+.exam{padding-block:20px 40px;display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:20px;align-items:start}
+.qcard{background:var(--surface);border-radius:14px;border:1px solid var(--line);box-shadow:var(--shadow);padding:22px;display:grid;gap:16px;min-width:0}
+.qhead{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+.qno{font-family:var(--f-num);font-weight:700;font-size:14px;color:var(--brand)}
+.sec{font-size:12.5px;font-weight:600;color:var(--muted)}
+.ctx{padding:14px 16px;border-radius:10px;background:var(--tint);font-size:14.5px}
+.ctx b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
+.note{font-size:13.5px;color:var(--muted);font-style:italic}
+.stem{display:grid;gap:4px;font-size:16.5px}
+.stem .main{font-weight:600}
+.fig{background:#fff;border-radius:10px;border:1px solid var(--line);padding:8px;overflow-x:auto}
+.fig svg{display:block;width:100%;height:auto;max-width:640px;margin:0 auto}
+.opts{display:grid;gap:9px}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:11px 14px;border-radius:11px;border:1.5px solid var(--line);background:var(--surface);transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--brand)}
+.opt .l{flex:none;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);font-weight:700;font-size:14px}
+.opt .t{padding-top:3px;min-width:0}
+.opt.sel{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 9%,var(--surface))}
+.opt.sel .l{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.opts.figopts{grid-template-columns:repeat(5,1fr)}
+.opts.figopts .opt{justify-content:center;padding:10px 6px}
+.opts.figopts .opt .t{display:none}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:16px}
+.btn{padding:10px 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font-weight:700;font-size:14px}
+.btn:hover{border-color:var(--brand)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.btn.flag{border-color:var(--gold);color:var(--gold)}
+.btn.flag.on{background:var(--gold);color:#fff}
+.btn.danger{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 74px);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:16px;display:grid;gap:14px}
+.side h4{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.nb{aspect-ratio:1;max-width:100%;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);font-family:var(--f-num);font-weight:700;font-size:13px;padding:0;position:relative}
+.nb.ans{background:var(--ok);border-color:var(--ok);color:#fff}
+.nb.flg{background:var(--gold);border-color:var(--gold);color:#fff}
+.nb.cur{box-shadow:0 0 0 2.5px var(--surface),0 0 0 4.5px var(--brand)}
+.legend{display:grid;gap:5px;font-size:12.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:8px}
+.legend i{width:13px;height:13px;border-radius:4px;border:1.5px solid var(--line);display:inline-block}
+.legend i.a{background:var(--ok);border-color:var(--ok)}.legend i.f{background:var(--gold);border-color:var(--gold)}
+.progress{font-size:13px}
+.bar{height:7px;border-radius:9px;background:var(--tint);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--ok);border-radius:9px;transition:width .2s}
+.kbd{font-size:12px;color:var(--muted)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(20,8,12,.55);padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+.mbox{max-width:440px;width:100%;background:var(--surface);border-radius:16px;padding:24px;display:grid;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.mbox h3{margin:0;font-size:20px}
+.mbox p{margin:0;color:var(--muted)}
+.mstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.mstats div{padding:10px 6px;border-radius:10px;background:var(--tint);font-size:12px;color:var(--muted)}
+.mstats b{display:block;font-family:var(--f-num);font-size:22px;color:var(--ink)}
+.mact{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+/* hasil */
+.result{padding-block:26px 48px;display:grid;gap:20px}
+.score{display:grid;grid-template-columns:auto minmax(0,1fr);gap:26px;align-items:center;padding:24px;border-radius:16px;background:var(--brand-2);color:#fff}
+:root[data-theme="dark"] .score{background:#2E1C23}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .score{background:#2E1C23}}
+.ring{width:150px;height:150px;position:relative;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .v{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .v b{font-family:var(--f-num);font-size:40px;line-height:1}
+.ring .v span{font-size:12px;opacity:.8;margin-top:4px}
+.score h2{margin:0 0 4px;font-size:clamp(22px,3vw,28px);line-height:1.2;text-wrap:balance}
+.score .who{opacity:.85;font-size:14px;margin:0 0 14px}
+.kpis{display:flex;flex-wrap:wrap;gap:10px}
+.kpi{padding:8px 14px;border-radius:10px;background:rgba(255,255,255,.1);min-width:92px}
+.kpi b{display:block;font-family:var(--f-num);font-size:22px;line-height:1.2}
+.kpi span{font-size:12px;opacity:.85}
+.kpi.ok b{color:#8FE0BE}.kpi.bad b{color:#FFB0B0}.kpi.sk b{color:#E8DDE1}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px;display:grid;gap:14px;min-width:0}
+.panel h3{margin:0;font-size:17px}
+.secrow{display:grid;grid-template-columns:minmax(0,1fr) 120px 76px;gap:12px;align-items:center;font-size:14px}
+.secrow .bar{margin:0;height:9px}
+.secrow .n{font-family:var(--f-num);font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.fbtn{padding:6px 13px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-size:13px;font-weight:700}
+.fbtn.on{background:var(--ink);border-color:var(--ink);color:var(--surface)}
+.rlist{display:grid;gap:14px}
+.ritem{border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px;min-width:0}
+.ritem.ok{border-left-width:1px}
+.rtop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}.badge.bad{background:var(--bad-soft);color:var(--bad)}.badge.sk{background:var(--skip-soft);color:var(--skip)}
+.ropts{display:grid;gap:6px}
+.ro{display:flex;gap:10px;align-items:flex-start;padding:8px 11px;border-radius:9px;border:1.5px solid transparent;font-size:14.5px}
+.ro .l{flex:none;font-weight:700;width:20px}
+.ro .tag{margin-left:auto;flex:none;font-size:12px;font-weight:700;padding-left:8px}
+.ro.key{background:var(--ok-soft);border-color:var(--ok)}
+.ro.key .tag{color:var(--ok)}
+.ro.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.ro.wrong .tag{color:var(--bad)}
+.ro .t{min-width:0}
+.pemb{padding:12px 14px;border-radius:10px;background:var(--tint);font-size:14px}
+.pemb b{color:var(--brand)}
+.racts{display:flex;flex-wrap:wrap;gap:10px}
+.empty{color:var(--muted);font-size:14px}
+
+@media (max-width:860px){
+  .exam{grid-template-columns:minmax(0,1fr)}
+  .side{position:static;order:2}
+  .grid{grid-template-columns:repeat(10,1fr)}
+}
+@media (max-width:560px){
+  .qcard{padding:16px}
+  .grid{grid-template-columns:repeat(6,1fr)}
+  .score{grid-template-columns:minmax(0,1fr);justify-items:start}
+  .ring{width:124px;height:124px}
+  .secrow{grid-template-columns:minmax(0,1fr) 70px}
+  .secrow .bar{display:none}
+  .ctrl .btn{flex:1 1 auto}
+  .top-title span{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---- tambahan CAT ---- */
+.login{padding-block:24px 48px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px;align-items:start}
+.lcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px;display:grid;gap:16px}
+.lcard h2{margin:0;font-size:19px}
+.field{display:grid;gap:6px}
+.field label{font-weight:600;font-size:14px}
+.field input{padding:11px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);font-size:16px;width:100%}
+.field input:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 22%,transparent)}
+.field input.tok{font-family:var(--f-num);font-weight:700;letter-spacing:.25em;text-transform:uppercase;font-size:20px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plist{display:grid;gap:8px}
+.pitem{display:flex;gap:12px;align-items:center;text-align:left;width:100%;padding:12px 14px;border-radius:11px;border:1.5px solid var(--line);background:var(--surface)}
+.pitem:hover{border-color:var(--brand)}
+.pitem.sel{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--surface))}
+.pitem .dot{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid var(--line)}
+.pitem.sel .dot{border:5px solid var(--brand)}
+.pitem .pt{flex:1;min-width:0}
+.pitem .pt b{display:block;font-size:15px}
+.pitem .pt span{font-size:12.5px;color:var(--muted)}
+.st{flex:none;font-size:11.5px;font-weight:800;letter-spacing:.06em;padding:3px 9px;border-radius:999px}
+.st.open{background:var(--ok-soft);color:var(--ok)}.st.closed{background:var(--skip-soft);color:var(--skip)}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:13.5px}
+.agree input{margin-top:3px;width:18px;height:18px;accent-color:var(--brand);flex:none}
+.msg{font-size:13.5px;padding:10px 12px;border-radius:9px;background:var(--bad-soft);color:var(--bad);font-weight:600}
+.big{padding:13px 18px;font-size:16px;width:100%}
+.ruleslist{margin:0;padding-left:20px;display:grid;gap:7px;font-size:14px}
+.ruleslist b{color:var(--brand)}
+.idcard{display:grid;gap:2px;padding:12px;border-radius:10px;background:var(--tint);font-size:13px}
+.idcard b{font-size:14.5px;overflow-wrap:anywhere}
+.viol{font-size:12.5px;font-weight:700;color:var(--bad)}
+body.locked .exam,body.locked .result{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.wm{position:fixed;inset:0;z-index:4;pointer-events:none;opacity:.07;background-repeat:repeat}
+.overlay{position:fixed;inset:0;z-index:30;display:grid;place-items:center;background:rgba(20,8,12,.82);padding:20px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px))}
+.obox{max-width:460px;width:100%;background:var(--surface);border-radius:16px;padding:26px;display:grid;gap:14px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.obox h3{margin:0;font-size:21px}
+.obox p{margin:0;color:var(--muted)}
+.obox .count{font-family:var(--f-num);font-size:44px;font-weight:700;color:var(--bad);line-height:1}
+.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--tint);border-top-color:var(--brand);margin:0 auto;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.stbadge{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.14);font-size:12.5px;font-weight:700;margin-left:6px}
+@media (max-width:860px){.login{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:480px){.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="wm" id="wm" hidden></div>
+
+<header class="top">
+  <div class="wrap">
+    <div class="mark" aria-hidden="true">TWK</div>
+    <div class="top-title"><b id="topTitle">Latihan TWK CPNS</b><span id="topSub">Pelatihan Persiapan Tes CPNS 2026</span></div>
+    <div class="timer" id="timer" hidden>00:00</div>
+  </div>
+</header>
+
+<main id="login" class="wrap login">
+  <section class="intro" style="gap:16px">
+    <div class="eyebrow">Pelatihan Persiapan Tes CPNS 2026</div>
+    <h1>Ujian Latihan TWK — Sistem CAT</h1>
+    <p class="lede">Masukkan data diri dan token dari pengawas. Hasil Anda langsung tercatat dan skor tampil setelah jawaban dikumpulkan.</p>
+    <div class="lcard" style="gap:12px">
+      <h2>Tata tertib ujian</h2>
+      <ol class="ruleslist">
+        <li>Ujian hanya dapat dimulai dengan <b>token</b> yang dibacakan pengawas.</li>
+        <li>Layar ujian berjalan dalam <b>mode layar penuh</b>. Keluar dari layar penuh, berpindah tab, atau membuka aplikasi lain dihitung sebagai <b>pelanggaran</b>.</li>
+        <li>Bila pelanggaran mencapai batas, jawaban <b>dikumpulkan otomatis</b> dengan status diskualifikasi.</li>
+        <li>Salin, tempel, dan klik kanan dinonaktifkan. Nama Anda tampil samar di layar sebagai penanda.</li>
+        <li>Urutan soal setiap peserta berbeda. Penilaian: benar 5, salah atau kosong 0.</li>
+        <li>Waktu dihitung oleh server. Jawaban terkumpul otomatis saat waktu habis.</li>
+      </ol>
+    </div>
+    <div class="by">Pemateri: Dr. Ea Cahya Septia Mahen, S.Pd., M.Si. · Dr. Dindin Nasrudin, M.Pd. · Saepudin Rahmatullah, M.Si.</div>
+  </section>
+  <form class="lcard" id="form" novalidate>
+    <h2>Masuk ujian</h2>
+    <div class="field"><label for="fNama">Nama lengkap</label><input id="fNama" autocomplete="name" maxlength="80" placeholder="Sesuai daftar hadir"></div>
+    <div class="row2">
+      <div class="field"><label for="fWa">Nomor WhatsApp</label><input id="fWa" inputmode="tel" autocomplete="tel" maxlength="16" placeholder="08xxxxxxxxxx"></div>
+      <div class="field"><label for="fAsal">Asal / instansi <span class="hint">(opsional)</span></label><input id="fAsal" maxlength="80" placeholder="Kota atau instansi"></div>
+    </div>
+    <div class="field"><label id="lPaket">Paket ujian</label><div class="plist" id="plist" role="radiogroup" aria-labelledby="lPaket"><p class="hint">Memuat daftar paket…</p></div></div>
+    <div class="field"><label for="fTok">Token</label><input id="fTok" class="tok" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="••••••"></div>
+    <label class="agree"><input type="checkbox" id="fAgree"> <span>Saya mengerjakan sendiri, tidak membuka sumber lain, dan menyetujui tata tertib ujian.</span></label>
+    <div class="msg" id="fMsg" hidden></div>
+    <button class="btn primary big" id="fGo" type="submit">Mulai ujian</button>
+  </form>
+</main>
+
+<main id="exam" class="wrap exam" hidden>
+  <section class="qcard" id="qcard" aria-live="polite"></section>
+  <aside class="side">
+    <div class="idcard"><span>Peserta</span><b id="idNama">-</b><span id="idWa">-</span><span class="viol" id="idViol"></span></div>
+    <div class="progress"><span id="progText">0 dari 0 terjawab</span><div class="bar"><i id="progBar" style="width:0"></i></div></div>
+    <h4>Nomor soal</h4>
+    <div class="grid" id="navgrid"></div>
+    <div class="legend"><span><i class="a"></i>Sudah dijawab</span><span><i class="f"></i>Ragu-ragu</span><span><i></i>Belum dijawab</span></div>
+    <button class="btn danger" id="finishBtn" type="button">Selesai &amp; kumpulkan</button>
+  </aside>
+</main>
+
+<main id="result" class="wrap result" hidden></main>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="mbox">
+    <h3 id="mTitle">Kumpulkan jawaban?</h3>
+    <div class="mstats"><div><b id="mAns">0</b>Dijawab</div><div><b id="mFlag">0</b>Ragu-ragu</div><div><b id="mEmpty">0</b>Kosong</div></div>
+    <p id="mMsg">Setelah dikumpulkan, jawaban tidak dapat diubah.</p>
+    <div class="mact"><button class="btn" id="mCancel" type="button">Kembali mengerjakan</button><button class="btn danger" id="mOk" type="button">Ya, kumpulkan</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="ov" hidden role="alertdialog" aria-modal="true"><div class="obox" id="obox"></div></div>
+
+<script>
+/* ======================================================================
+   ALAMAT SERVER — ganti dengan URL Aplikasi Web Apps Script (berakhiran /exec)
+   ====================================================================== */
+const API_URL = 'https://script.google.com/macros/s/AKfycbwGzS4PFU8iv-t_pm2NTaQMtErC8onDsK0HoaOYjcZIYghSZPhB9azRuU-T1ad3D5I/exec';
+
+const L = ['A','B','C','D','E'];
+const KEY = 'cat-twk-2026';
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let S = null, PAKET = [], selPaket = null, FIG = null, tick = null, lastViol = 0, guardOn = false;
+
+function persist(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function restore(){ try{ return JSON.parse(localStorage.getItem(KEY)); }catch(e){ return null; } }
+function clearState(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+function show(v){ ['login','exam','result'].forEach(x => $(x).hidden = x !== v); $('timer').hidden = v !== 'exam'; window.scrollTo(0,0); }
+function overlay(html){ if (html === null){ $('ov').hidden = true; return; } $('obox').innerHTML = html; $('ov').hidden = false; }
+
+async function api(body){
+  if (!/^https:\/\/script\.google\.com\//.test(API_URL)) throw new Error('Alamat server ujian belum diatur. Hubungi pengawas.');
+  const r = await fetch(API_URL, { method:'POST', body: JSON.stringify(body) });
+  if (!r.ok) throw new Error('Server tidak merespons (' + r.status + ').');
+  const d = await r.json();
+  if (!d.ok) throw new Error(d.err || 'Terjadi kesalahan.');
+  return d;
+}
+async function loadFig(){ if (FIG) return FIG; const r = await fetch('figur.json'); FIG = await r.json(); return FIG; }
+const now = () => Date.now() + (S ? S.offset : 0);
+
+/* ---------------- layar penuh & pengawasan ---------------- */
+const fsOK = () => !!(document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen);
+const isFS = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+function enterFS(){ const el = document.documentElement; try{ const p = (el.requestFullscreen || el.webkitRequestFullscreen).call(el); if (p && p.catch) p.catch(()=>{}); }catch(e){} }
+function exitFS(){ try{ if (isFS()) (document.exitFullscreen || document.webkitExitFullscreen).call(document); }catch(e){} }
+
+function violation(reason){
+  if (!guardOn || !S || S.state !== 'exam') return;
+  const t = Date.now(); if (t - lastViol < 2500) return; lastViol = t;
+  S.langgar = (S.langgar || 0) + 1; S.log = (S.log || []).concat(reason); persist(); updViol();
+  if (S.langgar >= S.maksLanggar){ submit('pelanggaran'); return; }
+  overlay(`<div class="count">${S.langgar}/${S.maksLanggar}</div><h3>Peringatan pelanggaran</h3>
+    <p>${esc(reason)} tercatat sebagai pelanggaran. Jika mencapai ${S.maksLanggar} kali, jawaban Anda dikumpulkan otomatis dengan status diskualifikasi.</p>
+    <button class="btn primary big" id="ovBack" type="button">Kembali ke ujian</button>`);
+  $('ovBack').onclick = () => { if (fsOK()) enterFS(); overlay(null); };
+}
+document.addEventListener('visibilitychange', () => { if (document.hidden) violation('Meninggalkan halaman ujian'); });
+window.addEventListener('blur', () => { if (!matchMedia('(pointer:coarse)').matches) setTimeout(() => { if (!document.hasFocus()) violation('Berpindah ke jendela atau aplikasi lain'); }, 300); });
+['fullscreenchange','webkitfullscreenchange'].forEach(ev => document.addEventListener(ev, () => { if (!isFS() && S && S.fsUsed) violation('Keluar dari layar penuh'); }));
+['contextmenu','copy','cut','paste','dragstart','selectstart'].forEach(ev => document.addEventListener(ev, e => { if (guardOn && !(e.target.closest && e.target.closest('input'))) e.preventDefault(); }));
+window.addEventListener('beforeunload', e => { if (guardOn && S && S.state === 'exam'){ e.preventDefault(); e.returnValue = ''; } });
+
+function guard(on){ guardOn = on; document.body.classList.toggle('locked', on); }
+
+function watermark(){
+  const t = esc(`${S.nama} · ${S.wa}`);
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='340' height='180'><text x='10' y='110' transform='rotate(-22 170 90)' font-family='Arial' font-size='16' font-weight='700' fill='%23888'>${t}</text></svg>`;
+  $('wm').style.backgroundImage = `url("data:image/svg+xml;utf8,${svg.replace(/#/g,'%23').replace(/"/g,"'")}")`;
+  $('wm').hidden = false;
+}
+
+/* ---------------- login ---------------- */
+async function loadPaket(){
+  try{
+    const d = await api({ action:'paket' });
+    PAKET = d.paket;
+    $('plist').innerHTML = PAKET.map(p => `<button type="button" class="pitem" role="radio" aria-checked="false" data-i="${p.i}"><span class="dot"></span>
+      <span class="pt"><b>Paket ${p.i+1} · ${esc(p.title)}</b><span>${p.n} soal · ${p.menit} menit</span></span>
+      <span class="st ${p.buka ? 'open' : 'closed'}">${p.buka ? 'DIBUKA' : 'DITUTUP'}</span></button>`).join('');
+    $('plist').querySelectorAll('.pitem').forEach(b => b.onclick = () => {
+      selPaket = +b.dataset.i;
+      $('plist').querySelectorAll('.pitem').forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-checked', x === b); });
+    });
+  }catch(err){ $('plist').innerHTML = `<div class="msg">${esc(err.message)}</div><button class="btn" type="button" id="reload">Muat ulang daftar paket</button>`; $('reload').onclick = loadPaket; }
+}
+function formErr(t){ $('fMsg').textContent = t; $('fMsg').hidden = !t; }
+
+$('form').addEventListener('submit', async e => {
+  e.preventDefault(); formErr('');
+  const nama = $('fNama').value.trim(), wa = $('fWa').value.replace(/\D/g,''), asal = $('fAsal').value.trim(), token = $('fTok').value.trim();
+  if (nama.length < 3) return formErr('Isi nama lengkap Anda.');
+  if (wa.length < 9) return formErr('Isi nomor WhatsApp yang aktif.');
+  if (selPaket === null) return formErr('Pilih paket ujian.');
+  if (!token) return formErr('Masukkan token dari pengawas.');
+  if (!$('fAgree').checked) return formErr('Centang pernyataan tata tertib terlebih dahulu.');
+  const usedFS = fsOK(); if (usedFS) enterFS();
+  $('fGo').disabled = true; $('fGo').textContent = 'Memeriksa token…';
+  try{
+    const d = await api({ action:'start', paket: selPaket, nama, wa, asal, token });
+    
+    const old = restore();
+    const same = old && old.sid === d.sid;
+    S = { state:'exam', sid:d.sid, paket:d.paket, title:d.title, sections:d.sections, items:d.items, end:d.end, offset:d.now - Date.now(),
+      maksLanggar:d.maksLanggar, nama:d.nama || nama, wa, ans: same ? old.ans : {}, flag: same ? old.flag : {}, cur: same ? old.cur : 0,
+      langgar: same ? old.langgar : 0, log: same ? old.log : [], fsUsed: usedFS && isFS(), started: Date.now() };
+    persist(); beginExam();
+  }catch(err){ exitFS(); formErr(err.message); }
+  finally{ $('fGo').disabled = false; $('fGo').textContent = 'Mulai ujian'; }
+});
+
+/* ---------------- ujian ---------------- */
+function beginExam(){
+  $('topTitle').textContent = `Paket ${S.paket+1} · ${S.title}`;
+  $('topSub').textContent = 'Ujian sedang berlangsung';
+  $('idNama').textContent = S.nama; $('idWa').textContent = S.wa; updViol();
+  watermark(); guard(true); show('exam'); renderQ(); renderNav(); startTimer();
+  setTimeout(() => { if (S && S.fsUsed === false && fsOK() && isFS()) { S.fsUsed = true; persist(); } }, 800);
+}
+function updViol(){ $('idViol').textContent = S.langgar ? `Pelanggaran: ${S.langgar} dari ${S.maksLanggar}` : ''; }
+function startTimer(){
+  clearInterval(tick);
+  const upd = () => {
+    const ms = Math.max(0, S.end - now()), s = Math.ceil(ms/1000);
+    $('timer').textContent = `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;
+    $('timer').classList.toggle('low', s <= 120);
+    if (ms <= 0){ clearInterval(tick); submit('waktu'); }
+  };
+  upd(); tick = setInterval(upd, 1000);
+}
+function qBody(q){
+  let h = '';
+  if (q.ctx) h += `<div class="ctx"><b>Bacaan</b>${esc(q.ctx)}</div>`;
+  if (q.note) h += `<div class="note">${esc(q.note)}</div>`;
+  const st = Array.isArray(q.stem) ? q.stem : [q.stem];
+  h += `<div class="stem">${st.map((s,k) => `<div class="${k===st.length-1 ? 'main' : ''}">${esc(s)}</div>`).join('')}</div>`;
+  if (q.fig && FIG && FIG[q.id]) h += `<div class="fig" role="img" aria-label="Gambar soal">${FIG[q.id]}</div>`;
+  return h;
+}
+function renderQ(){
+  const q = S.items[S.cur], i = S.cur, n = S.items.length, a = S.ans[q.id];
+  $('qcard').innerHTML = `
+    <div class="qhead"><span class="qno">SOAL ${i+1} / ${n}</span><span class="sec">${esc(S.sections[q.sec])}</span></div>
+    ${qBody(q)}
+    <div class="opts ${q.fig ? 'figopts' : ''}" role="radiogroup" aria-label="Pilihan jawaban">
+      ${q.opts.map((o,k) => `<button type="button" class="opt ${a===L[k] ? 'sel' : ''}" role="radio" aria-checked="${a===L[k]}" data-k="${k}"><span class="l">${L[k]}</span><span class="t">${esc(o)}</span></button>`).join('')}
+    </div>
+    <div class="ctrl">
+      <button class="btn" type="button" id="prevBtn" ${i===0 ? 'disabled' : ''}>← Sebelumnya</button>
+      <button class="btn flag ${S.flag[q.id] ? 'on' : ''}" type="button" id="flagBtn" aria-pressed="${!!S.flag[q.id]}">${S.flag[q.id] ? 'Ditandai ragu-ragu' : 'Tandai ragu-ragu'}</button>
+      ${i < n-1 ? '<button class="btn primary" type="button" id="nextBtn">Berikutnya →</button>' : '<button class="btn danger" type="button" id="endBtn">Selesai &amp; kumpulkan</button>'}
+    </div>`;
+  $('qcard').querySelectorAll('.opt').forEach(b => b.onclick = () => pick(+b.dataset.k));
+  $('prevBtn').onclick = () => go(S.cur-1);
+  $('flagBtn').onclick = () => { S.flag[q.id] = !S.flag[q.id]; persist(); renderQ(); renderNav(); };
+  if ($('nextBtn')) $('nextBtn').onclick = () => go(S.cur+1);
+  if ($('endBtn')) $('endBtn').onclick = askFinish;
+}
+function pick(k){ const id = S.items[S.cur].id; if (S.ans[id] === L[k]) delete S.ans[id]; else S.ans[id] = L[k]; persist(); renderQ(); renderNav(); }
+function go(i){ if (i<0 || i>=S.items.length) return; S.cur = i; persist(); renderQ(); renderNav(); $('qcard').scrollIntoView({block:'nearest'}); }
+function renderNav(){
+  const n = S.items.length, a = Object.keys(S.ans).length;
+  $('navgrid').innerHTML = S.items.map((q,i) => `<button type="button" class="nb ${S.ans[q.id] ? 'ans' : ''} ${S.flag[q.id] ? 'flg' : ''} ${i===S.cur ? 'cur' : ''}" data-i="${i}" aria-label="Soal ${i+1}">${i+1}</button>`).join('');
+  $('navgrid').querySelectorAll('.nb').forEach(b => b.onclick = () => go(+b.dataset.i));
+  $('progText').textContent = `${a} dari ${n} terjawab`; $('progBar').style.width = (a/n*100) + '%';
+}
+function askFinish(){
+  const n = S.items.length, a = Object.keys(S.ans).length, f = S.items.filter(q => S.flag[q.id]).length;
+  $('mAns').textContent = a; $('mFlag').textContent = f; $('mEmpty').textContent = n - a;
+  $('mMsg').textContent = n - a > 0 ? `Masih ada ${n-a} soal kosong (bernilai 0). Setelah dikumpulkan, jawaban tidak dapat diubah.` : 'Semua soal sudah dijawab. Setelah dikumpulkan, jawaban tidak dapat diubah.';
+  $('modal').hidden = false; $('mCancel').focus();
+}
+$('finishBtn').onclick = askFinish;
+$('mCancel').onclick = () => { $('modal').hidden = true; };
+$('mOk').onclick = () => { $('modal').hidden = true; submit('selesai'); };
+document.addEventListener('keydown', e => {
+  if (guardOn && ((e.ctrlKey || e.metaKey) && /^[acpsuvx]$/i.test(e.key) || e.key === 'F12' || e.key === 'PrintScreen')){ e.preventDefault(); return; }
+  if (!$('modal').hidden){ if (e.key === 'Escape') $('modal').hidden = true; return; }
+  if ($('exam').hidden || !$('ov').hidden || e.target.tagName === 'INPUT' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toUpperCase();
+  if (L.includes(k)) pick(L.indexOf(k)); else if (e.key === 'ArrowRight') go(S.cur+1); else if (e.key === 'ArrowLeft') go(S.cur-1);
+});
+
+/* ---------------- kumpulkan ---------------- */
+async function submit(alasan){
+  if (!S || S.state === 'result') return;
+  clearInterval(tick); S.state = 'sending'; S.alasan = S.alasan || alasan; persist();
+  const head = S.alasan === 'pelanggaran' ? 'Batas pelanggaran tercapai' : S.alasan === 'waktu' ? 'Waktu habis' : 'Mengumpulkan jawaban';
+  overlay(`<div class="spin"></div><h3>${head}</h3><p>Jawaban sedang dikirim ke server. Jangan tutup halaman ini.</p>`);
+  try{
+    const r = await api({ action:'submit', sid:S.sid, ans:S.ans, pelanggaran:S.langgar || 0, alasan:S.alasan });
+    S.state = 'result'; S.result = r; persist(); guard(false); exitFS(); overlay(null); renderResult('all');
+  }catch(err){
+    overlay(`<h3>Jawaban belum terkirim</h3><p>${esc(err.message)} Jawaban Anda tersimpan di perangkat ini. Periksa koneksi internet, lalu kirim ulang.</p>
+      <button class="btn primary big" id="ovRetry" type="button">Kirim ulang</button>`);
+    $('ovRetry').onclick = () => submit(S.alasan);
+  }
+}
+
+/* ---------------- hasil ---------------- */
+function renderResult(filter){
+  const R = S.result, n = S.items.length, pct = Math.round(R.benar / n * 100), C = 2*Math.PI*52;
+  const dur = `${Math.floor(R.durasi/60)} menit ${R.durasi%60} detik`;
+  const verdict = pct >= 80 ? 'Sangat baik' : pct >= 65 ? 'Baik' : pct >= 50 ? 'Cukup, terus berlatih' : 'Perlu banyak latihan';
+  const stTxt = { 'SELESAI':'', 'WAKTU HABIS':'Waktu habis', 'DISKUALIFIKASI':'Diskualifikasi pelanggaran', 'TERLAMBAT KIRIM':'Terlambat kirim' }[R.status] ?? R.status;
+  const secs = R.perBagian.map(b => `<div class="secrow"><span>${esc(b.nama)}</span><div class="bar"><i style="width:${b.benar/b.total*100}%"></i></div><span class="n">${b.benar}/${b.total}</span></div>`).join('');
+  let review = '';
+  if (R.tampilKunci){
+    const st = S.items.map(q => !R.ans[q.id] ? 'sk' : R.ans[q.id] === R.kunci[q.id] ? 'ok' : 'bad');
+    const shown = S.items.map((q,i) => i).filter(i => filter==='all' || (filter==='ok' && st[i]==='ok') || (filter==='wrong' && st[i]!=='ok'));
+    const ok = st.filter(x => x==='ok').length;
+    review = `<section class="panel"><h3>Jawaban benar dan pembahasan</h3>
+      <div class="filters"><button class="fbtn ${filter==='all'?'on':''}" data-f="all" type="button">Semua (${n})</button>
+      <button class="fbtn ${filter==='wrong'?'on':''}" data-f="wrong" type="button">Salah &amp; kosong (${n-ok})</button>
+      <button class="fbtn ${filter==='ok'?'on':''}" data-f="ok" type="button">Benar (${ok})</button></div>
+      <div class="rlist">${shown.length ? shown.map(i => {
+        const q = S.items[i], my = R.ans[q.id], key = R.kunci[q.id];
+        const badge = st[i]==='ok' ? '<span class="badge ok">✓ Benar · +5</span>' : st[i]==='bad' ? '<span class="badge bad">✗ Salah · 0</span>' : '<span class="badge sk">Tidak dijawab · 0</span>';
+        const opts = q.opts.map((o,k) => { const l = L[k], cls = l===key ? 'key' : (l===my ? 'wrong' : '');
+          const tag = l===key && l===my ? 'Jawaban Anda · benar' : l===key ? 'Kunci jawaban' : l===my ? 'Jawaban Anda' : '';
+          return `<div class="ro ${cls}"><span class="l">${l}.</span><span class="t">${esc(o)}</span>${tag ? `<span class="tag">${tag}</span>` : ''}</div>`; }).join('');
+        return `<article class="ritem"><div class="rtop"><span class="qno">SOAL ${i+1} · <span class="sec">${esc(S.sections[q.sec])}</span></span>${badge}</div>
+          ${qBody(q)}<div class="ropts">${opts}</div><div class="pemb"><b>Pembahasan (kunci ${key}).</b> ${esc(R.pemb[q.id])}</div></article>`;
+      }).join('') : '<p class="empty">Tidak ada soal pada kategori ini.</p>'}</div></section>`;
+  } else review = `<section class="panel"><h3>Kunci jawaban</h3><p class="empty">Kunci jawaban dan pembahasan akan dibahas bersama pemateri.</p></section>`;
+  $('result').innerHTML = `
+    <section class="score">
+      <div class="ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="11"/><circle cx="60" cy="60" r="52" fill="none" stroke="#C9962B" stroke-width="11" stroke-linecap="round" stroke-dasharray="${C*R.benar/n} ${C}"/></svg>
+        <div class="v"><b>${R.skor}</b><span>dari ${R.maks}</span></div></div>
+      <div>
+        <h2>Skor Paket ${S.paket+1}: ${esc(S.title)}${stTxt ? `<span class="stbadge">${esc(stTxt)}</span>` : ''}</h2>
+        <p class="who">${esc(S.nama)} · ${verdict} (${pct}% benar) · waktu ${dur}${R.pelanggaran ? ` · ${R.pelanggaran} pelanggaran` : ''}</p>
+        <div class="kpis"><div class="kpi ok"><b>${R.benar}</b><span>Benar</span></div><div class="kpi bad"><b>${R.salah}</b><span>Salah</span></div><div class="kpi sk"><b>${R.kosong}</b><span>Tidak dijawab</span></div><div class="kpi"><b>${R.skor}</b><span>Skor (benar × 5)</span></div></div>
+      </div>
+    </section>
+    <section class="panel"><h3>Hasil per bagian</h3>${secs}<p class="hint">Hasil ini sudah tercatat di rekap pengawas.</p></section>
+    ${review}
+    <div class="racts"><button class="btn primary" type="button" id="doneBtn">Selesai, kembali ke halaman masuk</button></div>`;
+  $('result').querySelectorAll('.fbtn').forEach(b => b.onclick = () => { renderResult(b.dataset.f); $('result').querySelector('.filters').scrollIntoView({block:'start'}); });
+  $('doneBtn').onclick = () => { clearState(); S = null; $('wm').hidden = true; $('fTok').value = ''; $('fAgree').checked = false; $('topTitle').textContent = 'Latihan TWK CPNS'; $('topSub').textContent = 'Pelatihan Persiapan Tes CPNS 2026'; show('login'); loadPaket(); };
+  $('topTitle').textContent = `Hasil Paket ${S.paket+1} · ${S.title}`; $('topSub').textContent = S.nama;
+  show('result');
+}
+
+/* ---------------- mulai ---------------- */
+(async function boot(){
+  const old = restore();
+  if (old && old.sid){
+    S = old;
+    if (S.items.some(q => q.fig)) { try{ await loadFig(); }catch(e){} }
+    if (S.state === 'result'){ $('wm').hidden = true; renderResult('all'); return; }
+    watermark(); $('idNama').textContent = S.nama; $('idWa').textContent = S.wa;
+    if (S.state === 'sending' || S.end - now() <= 0){ show('exam'); guard(true); submit(S.alasan || 'waktu'); return; }
+    show('exam'); renderQ(); renderNav(); updViol(); startTimer(); guard(true);
+    $('topTitle').textContent = `Paket ${S.paket+1} · ${S.title}`; $('topSub').textContent = 'Ujian sedang berlangsung';
+    overlay(`<h3>Lanjutkan ujian</h3><p>Halaman dimuat ulang. Jawaban Anda masih tersimpan dan waktu tetap berjalan.${S.langgar ? ` Pelanggaran tercatat: ${S.langgar} dari ${S.maksLanggar}.` : ''}</p>
+      <button class="btn primary big" id="ovCont" type="button">Lanjutkan ujian</button>`);
+    $('ovCont').onclick = () => { if (S.fsUsed && fsOK()) enterFS(); overlay(null); };
+    return;
+  }
+  loadPaket();
+})();
+</script>
+
+</body>
+</html>
