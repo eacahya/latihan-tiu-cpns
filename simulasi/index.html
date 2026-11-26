@@ -571,9 +571,9 @@ function renderResult(filter){
     <section class="panel"><h3>Nilai per subtes</h3><div class="subts">${subtes}</div>
       <p class="hint">Ambang batas: TWK 65, TIU 80, TKP 156 (KepmenPANRB 2026 untuk SKD sekolah kedinasan). Kelulusan SKD mensyaratkan ketiga subtes memenuhi ambang batas.</p></section>
     <section class="panel"><h3>Capaian per aspek</h3>${aspek}</section>
-    <section class="panel pdfbox"><div><h3>Laporan PDF</h3><p class="hint">Berisi identitas, nilai per subtes dan aspek, kesimpulan ambang batas, serta pembahasan singkat seluruh ${n} soal.</p></div>
+    <section class="panel pdfbox"><div><h3>Laporan PDF</h3><p class="hint">Berisi identitas, nilai per subtes dan aspek, kesimpulan ambang batas${R.tampilKunci ? `, serta pembahasan singkat seluruh ${n} soal` : ''}.</p></div>
       <button class="btn primary big" id="pdfBtn" type="button">Unduh laporan PDF</button><div id="pdfMsg" class="hint"></div></section>
-    ${review}
+    ${review || '<section class="panel"><h3>Pembahasan</h3><p class="empty">Kunci jawaban dan pembahasan akan dibahas bersama pemateri.</p></section>'}
     <div class="racts"><button class="btn" type="button" id="doneBtn">Selesai, kembali ke halaman masuk</button></div>`;
   $('result').querySelectorAll('.fbtn').forEach(b => b.onclick = () => { renderResult(b.dataset.f); $('result').querySelector('.filters').scrollIntoView({block:'start'}); });
   $('pdfBtn').onclick = makePDF;
@@ -699,7 +699,8 @@ async function buildPDF(){
   if (R.kosong) para(`•  Ada ${R.kosong} soal yang tidak dijawab. Soal kosong bernilai 0, padahal jawaban TKP terendah tetap bernilai 1 dan TWK/TIU berpeluang benar.`, { x: M + 6, w: CW - 6 });
 
   // ---- Pembahasan
-  newPage();
+  if (!R.tampilKunci){ heading('4. Pembahasan soal'); para('Kunci jawaban dan pembahasan belum dibuka oleh pengawas untuk sesi ini. Pembahasan akan disampaikan bersama pemateri.'); }
+  else { newPage();
   heading(`4. Pembahasan singkat ${S.items.length} soal`);
   para('Nomor soal mengikuti urutan pada sesi Anda (urutan diacak untuk setiap peserta).', { sz: 8.5, f: FI, color: K.muted });
   const figCache = {};
@@ -728,6 +729,7 @@ async function buildPDF(){
       para('Kunci: ' + optTxt(key), { sz: 8.8, f: FB, color: K.ok });
     }
     para('Pembahasan: ' + R.pemb[q.id], { sz: 8.6, color: K.muted, gap: 8 });
+  }
   }
 
   // ---- Kaki halaman
