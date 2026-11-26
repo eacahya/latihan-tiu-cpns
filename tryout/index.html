@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Try Out Diagnostik SKD CPNS 2026 · Simulasi CAT + Laporan Pribadi</title>
+<meta name="description" content="Try out diagnostik SKD CPNS 2026 berbasis CAT: 110 soal TWK, TIU, TKP dalam 100 menit. Setiap peserta mendapat laporan PDF pribadi berisi nilai per aspek, kesimpulan ambang batas, dan pembahasan seluruh soal.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Try Out Diagnostik SKD CPNS 2026">
+<meta property="og:description" content="Jum'at, 4 Desember 2026 · 07.30 WIB · Online. 110 soal sistem CAT + laporan PDF pribadi dengan pembahasan seluruh soal.">
+<meta property="og:image" content="https://eacahya.github.io/latihan-tiu-cpns/tryout/og.png">
+<meta property="og:url" content="https://eacahya.github.io/latihan-tiu-cpns/tryout/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#5E1727">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C9962B'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='800' font-size='22' text-anchor='middle' fill='%232A0E16'%3ECAT%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap">
+<style>
+:root{
+  --bg:#FBF7F2; --surface:#FFFFFF; --tint:#F4ECE6; --rose:#F3E9ED; --ink:#25161C; --muted:#5F4F56; --line:#E8DCD5;
+  --brand:#7A1F33; --brand-2:#5E1727; --brand-3:#46101D; --gold:#C9962B; --gold-ink:#2A0E16; --gold-soft:#F6E7C8;
+  --ok:#2C6A55; --ok-soft:#DDEFE7; --bad:#A12E2E; --bad-soft:#F7E0E0;
+  --f:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:18px; --shadow:0 1px 2px rgba(60,20,35,.05),0 10px 30px rgba(60,20,35,.07);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:var(--brand)}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--brand)}
+h1,h2,h3{margin:0;line-height:1.12;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:clamp(28px,4vw,42px);font-weight:800}
+h3{font-size:20px;font-weight:800}
+p{margin:0}
+.lead{font-size:clamp(17px,1.6vw,19px);color:var(--muted);max-width:62ch}
+section{padding-block:clamp(56px,8vw,96px)}
+.shead{display:grid;gap:12px;margin-bottom:36px;max-width:760px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:12px;border:2px solid transparent;font-weight:800;font-size:16px;text-decoration:none;cursor:pointer;transition:transform .15s,background .15s,border-color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:#D9A441}
+.btn-ghost{border-color:rgba(255,255,255,.4);color:#fff}
+.btn-ghost:hover{border-color:#fff}
+.btn-brand{background:var(--brand);color:#fff}
+.btn-brand:hover{background:var(--brand-2)}
+.btn-line{border-color:var(--line);background:var(--surface);color:var(--ink)}
+.btn-line:hover{border-color:var(--brand)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(70,16,29,.96);backdrop-filter:saturate(1.4) blur(8px);color:#fff}
+.nav .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff;font-weight:800;font-size:16px;line-height:1.2;margin-right:auto}
+.mark{display:grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--gold);color:var(--gold-ink);font-size:13px;font-weight:800;flex:none}
+.brand small{display:block;font-weight:600;font-size:12px;opacity:.75}
+.nav nav{display:flex;gap:4px}
+.nav nav a{color:#F2E4E8;text-decoration:none;font-weight:600;font-size:14.5px;padding:8px 12px;border-radius:8px}
+.nav nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav .btn{min-height:42px;padding:0 18px;font-size:14.5px}
+
+/* hero */
+.hero{background:var(--brand-2);color:#fff;padding-block:clamp(48px,7vw,88px) clamp(56px,8vw,100px);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-180px;top:-160px;width:560px;height:560px;border-radius:50%;border:70px solid rgba(201,150,43,.09);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:clamp(32px,5vw,64px);align-items:center;position:relative;z-index:1}
+.hero .eyebrow{color:var(--gold)}
+.hero h1{font-size:clamp(40px,6.4vw,74px);font-weight:800;margin:14px 0 18px}
+.hero h1 span{color:var(--gold)}
+.hero .lead{color:#F1DFE4}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 30px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.1);font-weight:700;font-size:15px}
+.chip svg{flex:none}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.count{background:var(--surface);color:var(--ink);border-radius:22px;padding:28px;box-shadow:0 30px 60px rgba(0,0,0,.25);display:grid;gap:18px}
+.count .lbl{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}
+.cd div{background:var(--rose);border-radius:14px;padding:14px 4px 10px}
+.cd b{display:block;font-family:var(--mono);font-size:clamp(28px,3.4vw,38px);line-height:1;color:var(--brand);font-variant-numeric:tabular-nums}
+.cd span{font-size:12.5px;font-weight:700;color:var(--muted)}
+.price-mini{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px;flex-wrap:wrap}
+.price-mini b{font-family:var(--mono);font-size:30px;color:var(--ink)}
+.price-mini s{color:var(--muted);font-family:var(--mono);font-size:16px;margin-left:6px}
+.price-mini .tag{font-size:13px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--gold-soft);color:#7A5314}
+.close-note{font-size:14px;font-weight:600;color:var(--bad)}
+
+/* stats */
+.stats{background:var(--surface);border-bottom:1px solid var(--line);padding-block:0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:26px 18px;display:grid;gap:2px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{font-family:var(--mono);font-size:clamp(28px,3.4vw,40px);line-height:1.1;color:var(--brand)}
+.stat span{font-size:14.5px;font-weight:600;color:var(--muted)}
+
+/* laporan */
+.report{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.ticks{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:14px}
+.ticks li{display:flex;gap:14px;align-items:flex-start;font-size:16.5px}
+.ticks li svg{flex:none;margin-top:3px}
+.ticks b{display:block}
+.ticks span{color:var(--muted);font-size:15px}
+.paper{background:var(--surface);border-radius:14px;box-shadow:0 2px 4px rgba(60,20,35,.06),0 30px 60px rgba(60,20,35,.16);overflow:hidden;transform:rotate(1.2deg);max-width:500px;justify-self:center;width:100%}
+.paper .ph{background:var(--brand-3);color:#fff;padding:18px 22px}
+.paper .ph b{display:block;font-size:15px;letter-spacing:.02em}
+.paper .ph span{font-size:11.5px;color:var(--gold)}
+.paper .pb{padding:18px 22px 22px;display:grid;gap:14px}
+.verdict{border:1.5px solid var(--bad);background:var(--bad-soft);border-radius:10px;padding:12px 14px}
+.verdict small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;color:var(--muted)}
+.verdict b{color:var(--bad);font-size:15px}
+.verdict span{display:block;font-size:12px;color:var(--ink)}
+.ptable{width:100%;border-collapse:collapse;font-size:12.5px}
+.ptable th{background:var(--brand);color:#fff;text-align:left;padding:6px 8px;font-weight:700}
+.ptable td{padding:6px 8px;border-bottom:1px solid var(--line)}
+.ptable .n{text-align:center;font-family:var(--mono);font-weight:600}
+.ptable .ok{color:var(--ok);font-weight:800}.ptable .no{color:var(--bad);font-weight:800}
+.abars{display:grid;gap:7px}
+.abar{display:grid;grid-template-columns:120px 1fr 38px;gap:10px;align-items:center;font-size:12px}
+.abar i{height:7px;border-radius:9px;background:var(--rose);overflow:hidden;display:block}
+.abar i em{display:block;height:100%;background:var(--ok);border-radius:9px}
+.abar .w em{background:var(--gold)}.abar .l em{background:var(--bad)}
+.abar b{text-align:right;font-family:var(--mono);font-size:11.5px}
+.pq{border-top:1px dashed var(--line);padding-top:12px;font-size:12px;display:grid;gap:4px}
+.pq .t{display:flex;justify-content:space-between;background:var(--rose);padding:5px 8px;border-radius:6px;font-weight:800;color:var(--brand)}
+.pq .t em{font-style:normal;color:var(--ok)}
+.pq .k{color:var(--ok);font-weight:700}
+.pq .e{color:var(--muted)}
+
+/* keunggulan */
+.feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;display:grid;gap:10px;align-content:start;box-shadow:var(--shadow)}
+.ic{width:52px;height:52px;border-radius:14px;background:var(--rose);display:grid;place-items:center}
+.card p{color:var(--muted);font-size:15.5px}
+
+/* komposisi */
+.tbl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.tbl table{width:100%;border-collapse:collapse}
+.tbl th{background:var(--brand);color:#fff;text-align:left;padding:14px 20px;font-size:14px;letter-spacing:.04em}
+.tbl td{padding:18px 20px;border-top:1px solid var(--line);vertical-align:top}
+.tbl td.c{text-align:center;font-family:var(--mono);font-weight:800;font-size:22px}
+.tbl td.c.g{color:var(--brand)}
+.tbl .sub{display:block;font-weight:800;font-size:17px}
+.tbl .asp{color:var(--muted);font-size:14.5px}
+.tbl tfoot td{background:var(--tint);font-weight:800}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+
+/* alur */
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:s}
+.step{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px 24px;display:grid;gap:8px;align-content:start}
+.step .no{font-family:var(--mono);font-weight:800;font-size:15px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:#fff}
+.step p{color:var(--muted);font-size:15px}
+.day{margin-top:26px;background:var(--brand-3);color:#fff;border-radius:var(--r);padding:26px clamp(20px,3vw,32px);display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px 36px;align-items:center}
+.day h3{color:var(--gold)}
+.tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.tl div{border-left:2px solid rgba(201,150,43,.6);padding-left:12px}
+.tl b{display:block;font-family:var(--mono);font-size:18px;color:var(--gold)}
+.tl span{font-size:14px;color:#F1DFE4}
+
+/* daftar */
+.reg{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.pricebox{background:var(--brand-2);color:#fff;border-radius:22px;padding:30px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px;position:sticky;top:92px}
+.pricebox .eyebrow{color:var(--gold)}
+.big{font-family:var(--mono);font-size:clamp(40px,5vw,58px);font-weight:800;line-height:1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 0}
+.big s{font-size:22px;opacity:.6;margin-left:10px}
+.ebnote{justify-self:start;max-width:100%;background:var(--gold);color:var(--gold-ink);font-weight:800;font-size:14px;padding:6px 12px;border-radius:10px}
+.incl{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.incl li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:#F1DFE4}
+.incl svg{flex:none;margin-top:3px}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,3vw,34px);display:grid;gap:18px;box-shadow:var(--shadow)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:7px}
+.field label{font-weight:700;font-size:14.5px}
+.field label small{font-weight:500;color:var(--muted)}
+.field input[type=text],.field input[type=tel],.field input[type=email]{width:100%;min-height:50px;padding:0 15px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font-size:16px}
+.field input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(122,31,51,.14)}
+.pay{background:var(--tint);border-radius:14px;padding:18px;display:grid;gap:10px}
+.pay .h{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+.payrow{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.payrow span{color:var(--muted);font-size:14.5px}
+.payrow b{font-family:var(--mono);font-size:17px}
+.copy{min-height:36px;padding:0 12px;border-radius:9px;border:1.5px solid var(--line);background:var(--surface);font-weight:700;font-size:13px;cursor:pointer}
+.copy:hover{border-color:var(--brand)}
+.drop{display:grid;place-items:center;gap:8px;text-align:center;padding:24px 16px;border:2px dashed #C9B3BB;border-radius:14px;background:#FFFCFA;cursor:pointer;transition:border-color .15s,background .15s}
+.drop:hover,.drop.over{border-color:var(--brand);background:var(--rose)}
+.drop b{font-size:15.5px}
+.drop span{font-size:13.5px;color:var(--muted)}
+.drop img{max-height:180px;border-radius:10px;border:1px solid var(--line)}
+.agree{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--muted)}
+.agree input{width:20px;height:20px;margin-top:2px;accent-color:var(--brand);flex:none}
+.msg{padding:12px 14px;border-radius:12px;font-weight:600;font-size:14.5px}
+.msg.err{background:var(--bad-soft);color:var(--bad)}
+.msg.info{background:var(--gold-soft);color:#6B4810}
+.done{display:grid;gap:14px;text-align:center;justify-items:center;padding:12px 0}
+.done .tick{width:72px;height:72px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center}
+.done p{color:var(--muted);max-width:46ch}
+.status{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:grid;gap:12px}
+.status form{display:flex;gap:10px;flex-wrap:wrap}
+.status input{flex:1 1 200px;min-height:48px;padding:0 14px;border-radius:12px;border:1.5px solid var(--line);font-size:16px}
+.status input:focus{outline:none;border-color:var(--brand)}
+.status .btn{min-height:48px}
+.sres{font-size:15px;font-weight:700}
+.sres.ok{color:var(--ok)}.sres.wait{color:#7A5314}.sres.no{color:var(--bad)}
+
+/* faq */
+.faq{display:grid;gap:12px;max-width:860px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 22px}
+summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:800;font-size:17px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);font-size:22px;color:var(--brand);flex:none}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 18px;color:var(--muted)}
+
+/* pemateri */
+.team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.person{display:flex;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.av{flex:none;width:60px;height:60px;border-radius:50%;background:var(--brand);color:var(--gold);display:grid;place-items:center;font-weight:800;font-size:20px}
+.person b{display:block;font-size:16.5px;line-height:1.3}
+.person span{font-size:14px;color:var(--muted)}
+
+/* cta & footer */
+.final{background:var(--brand-2);color:#fff;text-align:center}
+.final .wrap{display:grid;gap:18px;justify-items:center}
+.final .lead{color:#F1DFE4}
+footer{background:var(--brand-3);color:#E5D3D9;padding-block:34px;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--gold)}
+.wa-float{position:fixed;right:max(18px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:10px;background:#1F7A4D;color:#fff;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+
+@media (max-width:980px){
+  .hero .wrap,.report,.reg{grid-template-columns:minmax(0,1fr)}
+  .feat{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .team{grid-template-columns:minmax(0,1fr)}
+  .day{grid-template-columns:minmax(0,1fr)}
+  .tl{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pricebox{position:static}
+  .nav nav{display:none}
+}
+@media (max-width:640px){
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .feat,.steps{grid-template-columns:minmax(0,1fr)}
+  .row2{grid-template-columns:minmax(0,1fr)}
+  .tl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tbl th:nth-child(3),.tbl td:nth-child(3){display:none}
+  .brand small{display:none}
+  .ctas .btn{flex:1 1 100%}
+  .wa-float span{display:none}
+  .abar{grid-template-columns:96px 1fr 34px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark" aria-hidden="true">CAT</span><span>Try Out SKD CPNS 2026<small>Pelatihan Persiapan Tes CPNS</small></span></a>
+    <nav aria-label="Menu utama"><a href="#laporan">Laporan</a><a href="#keunggulan">Keunggulan</a><a href="#alur">Alur</a><a href="#faq">FAQ</a></nav>
+    <a class="btn btn-gold" href="#daftar">Daftar</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Pelatihan Persiapan Tes CPNS 2026</div>
+      <h1>Try Out Diagnostik <span>SKD CPNS</span></h1>
+      <p class="lead">Kerjakan 110 soal TWK, TIU, dan TKP dalam sistem CAT seperti ujian sesungguhnya. Begitu selesai, Anda menerima laporan PDF pribadi: di aspek mana Anda kuat, di mana masih kurang, dan apakah Anda sudah lolos ambang batas.</p>
+      <div class="chips">
+        <span class="chip"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9962B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span id="hDate">Jum'at, 4 Desember 2026</span></span>
+        <span class="chip"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9962B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="hTime">07.30 WIB</span></span>
+        <span class="chip"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9962B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>Online · HP atau laptop</span>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-gold" href="#daftar">Daftar sekarang
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#laporan">Lihat contoh laporan</a>
+      </div>
+    </div>
+    <aside class="count" aria-label="Hitung mundur try out">
+      <div class="lbl">Try out dimulai dalam</div>
+      <div class="cd" id="cd"><div><b id="cdD">--</b><span>Hari</span></div><div><b id="cdH">--</b><span>Jam</span></div><div><b id="cdM">--</b><span>Menit</span></div><div><b id="cdS">--</b><span>Detik</span></div></div>
+      <div class="price-mini"><div><b id="pmNow">Rp20.000</b><s id="pmOld">Rp25.000</s></div><span class="tag" id="pmTag">Early bird s.d. 30 Nov</span></div>
+      <div class="close-note" id="closeNote">Pendaftaran ditutup Kamis, 3 Desember 2026 pukul 20.00 WIB</div>
+      <a class="btn btn-brand" href="#daftar">Amankan kursi Anda</a>
+    </aside>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><b>110</b><span>soal TWK · TIU · TKP</span></div>
+    <div class="stat"><b>100</b><span>menit, sistem CAT</span></div>
+    <div class="stat"><b>11</b><span>aspek dinilai terpisah</span></div>
+    <div class="stat"><b>1</b><span>laporan PDF pribadi</span></div>
+  </div>
+</div>
+
+<section id="laporan">
+  <div class="wrap report">
+    <div>
+      <div class="eyebrow">Keunggulan utama</div>
+      <h2 style="margin-top:12px">Bukan sekadar skor. Anda pulang membawa peta kekuatan dan kelemahan.</h2>
+      <ul class="ticks">
+        <li><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2C6A55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Kesimpulan ambang batas</b><span>Memenuhi atau belum memenuhi ambang batas TWK 65, TIU 80, TKP 156, sesuai KepmenPANRB 2026.</span></div></li>
+        <li><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2C6A55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Nilai per subtes dan per aspek</b><span>Nasionalisme, Integritas, Bela Negara, Verbal, Numerik, Figural, Pelayanan Publik, Jejaring Kerja, Sosial Budaya, TIK, Profesionalisme.</span></div></li>
+        <li><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2C6A55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Saran tindak lanjut</b><span>Tiga aspek terlemah dan berapa poin lagi yang dibutuhkan untuk lolos.</span></div></li>
+        <li><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2C6A55" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Pembahasan singkat 110 soal</b><span>Jawaban Anda, kunci, skor tiap pilihan TKP, dan alasannya. Bisa disimpan dan dipelajari ulang.</span></div></li>
+      </ul>
+    </div>
+    <figure class="paper" style="margin:0" aria-label="Contoh tampilan laporan PDF peserta">
+      <div class="ph"><b>LAPORAN HASIL SIMULASI CAT SKD CPNS</b><span>Contoh tampilan · data peserta fiktif</span></div>
+      <div class="pb">
+        <div class="verdict"><small>KESIMPULAN</small><b>BELUM MEMENUHI AMBANG BATAS SKD</b><span>Subtes yang belum mencapai ambang batas: TIU</span></div>
+        <table class="ptable"><thead><tr><th>Subtes</th><th>Skor</th><th>Ambang</th><th>Status</th></tr></thead>
+          <tbody><tr><td>TWK</td><td class="n">70/150</td><td class="n">65</td><td class="ok">MEMENUHI</td></tr>
+          <tr><td>TIU</td><td class="n">75/175</td><td class="n">80</td><td class="no">BELUM</td></tr>
+          <tr><td>TKP</td><td class="n">180/225</td><td class="n">156</td><td class="ok">MEMENUHI</td></tr></tbody></table>
+        <div class="abars">
+          <div class="abar"><span>Nasionalisme</span><i><em style="width:80%"></em></i><b>80%</b></div>
+          <div class="abar w"><span>Numerik</span><i><em style="width:54%"></em></i><b>54%</b></div>
+          <div class="abar l"><span>Verbal</span><i><em style="width:25%"></em></i><b>25%</b></div>
+          <div class="abar"><span>Pelayanan Publik</span><i><em style="width:80%"></em></i><b>80%</b></div>
+        </div>
+        <div class="pq"><div class="t">Soal 45 · TIU – Numerik <em>Benar (+5)</em></div>
+          <div class="k">Kunci: B. Rp480.000</div><div class="e">Pembahasan: +20% lalu −20% → total −4%. 96% × 500.000 = Rp480.000.</div></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section id="keunggulan" style="background:var(--tint)">
+  <div class="wrap">
+    <div class="shead"><div class="eyebrow">Mengapa ikut try out ini</div><h2>Dirancang untuk mendiagnosis, bukan sekadar menguji</h2></div>
+    <div class="feat">
+      <div class="card"><div class="ic"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>Sistem CAT seperti aslinya</h3><p>Waktu dihitung server, urutan soal diacak per peserta, mode layar penuh, dan navigasi nomor soal dengan tanda ragu-ragu.</p></div>
+      <div class="card"><div class="ic"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><h3>Pengawasan anti-curang</h3><p>Berpindah tab atau keluar dari layar penuh tercatat sebagai pelanggaran. Hasil yang Anda terima benar-benar mencerminkan kemampuan Anda.</p></div>
+      <div class="card"><div class="ic"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><h3>Ambang batas terbaru</h3><p>Penilaian mengikuti ketentuan SKD 2026: TWK dan TIU benar 5, TKP 1–5 per pilihan, dengan ambang batas TWK 65, TIU 80, TKP 156.</p></div>
+      <div class="card"><div class="ic"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><h3>Laporan PDF instan</h3><p>Langsung bisa diunduh begitu jawaban dikumpulkan. Tidak perlu menunggu pengumuman.</p></div>
+      <div class="card"><div class="ic"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div><h3>Peringkat peserta</h3><p>Lihat posisi Anda di antara seluruh peserta. Peringkat diumumkan di grup peserta setelah sesi selesai.</p></div>
+      <div class="card"><div class="ic"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F33" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg></div><h3>Soal disusun akademisi</h3><p>Soal dan pembahasan disusun oleh tim pemateri bergelar doktor dan magister yang membina pelatihan persiapan CPNS.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="komposisi">
+  <div class="wrap">
+    <div class="shead"><div class="eyebrow">Komposisi soal</div><h2>Sama dengan struktur SKD CPNS</h2></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Subtes</th><th style="text-align:center">Soal</th><th>Aspek yang dinilai</th><th style="text-align:center">Ambang batas</th></tr></thead>
+      <tbody>
+        <tr><td><span class="sub">TWK</span><span class="asp">Tes Wawasan Kebangsaan</span></td><td class="c">30</td><td class="asp">Nasionalisme, Integritas, Bela Negara</td><td class="c g">65</td></tr>
+        <tr><td><span class="sub">TIU</span><span class="asp">Tes Intelegensia Umum</span></td><td class="c">35</td><td class="asp">Verbal (analogi, silogisme, analitis), Numerik, Figural</td><td class="c g">80</td></tr>
+        <tr><td><span class="sub">TKP</span><span class="asp">Tes Karakteristik Pribadi</span></td><td class="c">45</td><td class="asp">Pelayanan Publik, Jejaring Kerja, Sosial Budaya, TIK, Profesionalisme</td><td class="c g">156</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td class="c">110</td><td>100 menit</td><td class="c">550</td></tr></tfoot>
+    </table></div>
+    <p class="note">Ambang batas mengacu pada KepmenPANRB 2026 untuk SKD. Try out ini adalah latihan diagnostik dan tidak berisi soal resmi BKN.</p>
+  </div>
+</section>
+
+<section id="alur" style="background:var(--tint)">
+  <div class="wrap">
+    <div class="shead"><div class="eyebrow">Alur pendaftaran</div><h2>Empat langkah, semuanya dari HP</h2></div>
+    <div class="steps">
+      <div class="step"><span class="no">1</span><h3>Transfer biaya</h3><p>Transfer sesuai nominal ke rekening panitia yang tertera di formulir.</p></div>
+      <div class="step"><span class="no">2</span><h3>Isi formulir</h3><p>Isi nama dan nomor WhatsApp aktif, lalu unggah foto bukti transfer di halaman ini.</p></div>
+      <div class="step"><span class="no">3</span><h3>Verifikasi panitia</h3><p>Panitia memverifikasi pembayaran dan memasukkan Anda ke grup WhatsApp peserta. Cek status kapan saja di halaman ini.</p></div>
+      <div class="step"><span class="no">4</span><h3>Ikut try out</h3><p>Masuk dengan nomor WhatsApp yang didaftarkan dan token dari panitia. Hanya nomor terverifikasi yang bisa masuk.</p></div>
+    </div>
+    <div class="day">
+      <div><div class="eyebrow" style="color:#F0D6A0">Hari-H</div><h3 id="dayTitle" style="font-size:24px;margin-top:6px">Jum'at, 4 Des 2026</h3></div>
+      <div class="tl">
+        <div><b>07.00</b><span>Cek koneksi &amp; baterai</span></div>
+        <div><b>07.25</b><span>Token dibagikan di grup</span></div>
+        <div><b>07.30</b><span>Try out dimulai</span></div>
+        <div><b>09.10</b><span>Waktu habis</span></div>
+        <div><b>09.10</b><span>Laporan PDF diunduh</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="daftar">
+  <div class="wrap reg">
+    <div class="pricebox">
+      <div class="eyebrow">Biaya pendaftaran</div>
+      <div class="big"><span id="bNow">Rp20.000</span><s id="bOld">Rp25.000</s></div>
+      <span class="ebnote" id="bTag">Harga early bird sampai Senin, 30 November 2026</span>
+      <ul class="incl">
+        <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9962B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>1 sesi try out CAT, 110 soal</li>
+        <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9962B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Laporan PDF pribadi + kesimpulan ambang batas</li>
+        <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9962B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pembahasan singkat seluruh soal</li>
+        <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9962B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Peringkat dan grup WhatsApp peserta</li>
+      </ul>
+      <div class="close-note" style="color:#FFC9C9" id="bClose">Pendaftaran ditutup Kamis, 3 Desember 2026 pukul 20.00 WIB</div>
+    </div>
+
+    <div>
+      <form class="form" id="regForm" novalidate>
+        <div><div class="eyebrow">Formulir pendaftaran</div><h2 style="font-size:clamp(26px,3vw,32px);margin-top:8px">Daftar try out</h2></div>
+        <div class="field"><label for="rNama">Nama lengkap</label><input type="text" id="rNama" autocomplete="name" maxlength="80" placeholder="Nama ini tercetak di laporan"></div>
+        <div class="row2">
+          <div class="field"><label for="rWa">Nomor WhatsApp aktif</label><input type="tel" id="rWa" inputmode="tel" autocomplete="tel" maxlength="18" placeholder="08xxxxxxxxxx"></div>
+          <div class="field"><label for="rEmail">Email <small>(opsional)</small></label><input type="email" id="rEmail" autocomplete="email" maxlength="100" placeholder="nama@email.com"></div>
+        </div>
+        <div class="field"><label for="rAsal">Asal kota / instansi</label><input type="text" id="rAsal" maxlength="80" placeholder="Contoh: Bandung"></div>
+
+        <div class="pay" id="payBox">
+          <div class="h">Pembayaran</div>
+          <div class="payrow"><span>Nominal transfer</span><b id="pNom">Rp20.000</b></div>
+          <div id="payDetail">
+            <div class="payrow"><span id="pBank">Bank</span><span style="display:flex;gap:10px;align-items:center"><b id="pRek">-</b><button class="copy" type="button" id="cpRek">Salin</button></span></div>
+            <div class="payrow"><span>Atas nama</span><b id="pAn" style="font-family:var(--f);font-size:15.5px">-</b></div>
+          </div>
+          <div class="msg info" id="payWait" hidden>Nomor rekening sedang disiapkan panitia. Silakan kembali sebentar lagi atau hubungi narahubung.</div>
+        </div>
+
+        <div class="field"><label id="lBukti">Bukti transfer</label>
+          <label class="drop" id="drop" for="rBukti">
+            <svg aria-hidden="true" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#7A1F33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+            <b id="dropT">Pilih foto atau tangkapan layar bukti transfer</b><span id="dropS">JPG, PNG, atau PDF · maks. 6 MB</span>
+            <img id="prev" alt="Pratinjau bukti transfer" hidden>
+          </label>
+          <input type="file" id="rBukti" accept="image/*,application/pdf" aria-labelledby="lBukti" hidden>
+        </div>
+        <label class="agree"><input type="checkbox" id="rAgree"><span>Data yang saya isi benar. Saya memahami bahwa hanya nomor WhatsApp ini yang dapat masuk ke try out setelah pembayaran diverifikasi.</span></label>
+        <div class="msg err" id="rMsg" hidden></div>
+        <button class="btn btn-brand" type="submit" id="rGo">Kirim pendaftaran</button>
+      </form>
+
+      <div class="form" id="regDone" hidden>
+        <div class="done">
+          <div class="tick"><svg aria-hidden="true" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2C6A55" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h2 style="font-size:28px">Pendaftaran terkirim</h2>
+          <p id="doneTxt">Panitia akan memverifikasi pembayaran Anda dan memasukkan Anda ke grup WhatsApp peserta.</p>
+          <a class="btn btn-line" id="doneWa" href="#" target="_blank" rel="noopener" hidden>Konfirmasi ke narahubung via WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="status" id="status">
+        <h3 style="font-size:18px">Sudah mendaftar? Cek status pembayaran</h3>
+        <form id="stForm" novalidate><input type="tel" id="sWa" inputmode="tel" placeholder="Nomor WhatsApp terdaftar" aria-label="Nomor WhatsApp terdaftar"><button class="btn btn-line" type="submit" id="sGo">Cek status</button></form>
+        <div class="sres" id="sRes" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--tint)">
+  <div class="wrap">
+    <div class="shead"><div class="eyebrow">Pertanyaan umum</div><h2>Yang sering ditanyakan</h2></div>
+    <div class="faq">
+      <details><summary>Perangkat apa yang dibutuhkan?</summary><p>HP atau laptop dengan browser terbaru (Chrome disarankan) dan koneksi internet stabil. Pastikan baterai penuh. Selama try out, jangan berpindah aplikasi atau tab karena tercatat sebagai pelanggaran.</p></details>
+      <details><summary>Mengapa harus serentak pukul 07.30?</summary><p>Agar suasananya seperti SKD sesungguhnya, peringkat adil karena semua peserta mengerjakan pada waktu yang sama, dan soal tidak beredar sebelum semua peserta selesai.</p></details>
+      <details><summary>Bagaimana jika saya berhalangan di jam tersebut?</summary><p>Konfirmasikan kepada narahubung paling lambat sehari sebelumnya. Panitia menyediakan sesi susulan terbatas. Laporan PDF tetap Anda terima, tetapi hasil sesi susulan tidak masuk peringkat.</p></details>
+      <details><summary>Kapan laporan PDF bisa diunduh?</summary><p>Langsung setelah Anda mengumpulkan jawaban atau waktu habis. Tombol "Unduh laporan PDF" muncul di halaman hasil. Simpan file tersebut untuk dipelajari kembali.</p></details>
+      <details><summary>Apakah soalnya sama dengan soal SKD resmi?</summary><p>Tidak. Soal disusun tim pemateri mengikuti kisi-kisi dan tipe soal SKD. Tujuannya mendiagnosis kesiapan Anda, bukan membocorkan soal.</p></details>
+      <details><summary>Berapa lama verifikasi pembayaran?</summary><p>Biasanya di hari yang sama. Cek statusnya di bagian "Cek status pembayaran" dengan nomor WhatsApp Anda.</p></details>
+      <details><summary>Bagaimana data saya digunakan?</summary><p>Nama dan nomor WhatsApp hanya dipakai untuk verifikasi peserta, grup peserta, dan laporan hasil. Data tidak dibagikan kepada pihak lain.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="pemateri">
+  <div class="wrap">
+    <div class="shead"><div class="eyebrow">Tim pemateri</div><h2>Disusun dan dibina oleh</h2></div>
+    <div class="team">
+      <div class="person"><span class="av" aria-hidden="true">EC</span><div><b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b><span>Pemateri pelatihan persiapan CPNS</span></div></div>
+      <div class="person"><span class="av" aria-hidden="true">DN</span><div><b>Dr. Dindin Nasrudin, M.Pd.</b><span>Pemateri pelatihan persiapan CPNS</span></div></div>
+      <div class="person"><span class="av" aria-hidden="true">SR</span><div><b>Saepudin Rahmatullah, M.Si.</b><span>Pemateri pelatihan persiapan CPNS</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Ketahui posisi Anda sebelum ujian sesungguhnya</h2>
+    <p class="lead">Satu sesi 100 menit, satu laporan yang memberi tahu persis apa yang perlu diperbaiki.</p>
+    <a class="btn btn-gold" href="#daftar">Daftar sekarang</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Pelatihan Persiapan Tes CPNS · Try Out Diagnostik SKD</span>
+    <span id="footCp"></span>
+  </div>
+</footer>
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" hidden aria-label="Tanya panitia via WhatsApp">
+  <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-13.4 7.9L3 21l1.2-4.4A9 9 0 1 1 21 12z"/></svg><span>Tanya panitia</span></a>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwGzS4PFU8iv-t_pm2NTaQMtErC8onDsK0HoaOYjcZIYghSZPhB9azRuU-T1ad3D5I/exec';
+const $ = id => document.getElementById(id);
+const rp = n => 'Rp' + Number(n).toLocaleString('id-ID');
+const HARI = ['Minggu','Senin','Selasa','Rabu','Kamis',"Jum'at",'Sabtu'];
+const BULAN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const wibParts = t => { const d = new Date(t + 7*3600e3); return { h: HARI[d.getUTCDay()], d: d.getUTCDate(), m: BULAN[d.getUTCMonth()], y: d.getUTCFullYear(), jam: String(d.getUTCHours()).padStart(2,'0') + '.' + String(d.getUTCMinutes()).padStart(2,'0') }; };
+const tgl = t => { const p = wibParts(t); return `${p.h}, ${p.d} ${p.m} ${p.y}`; };
+let INFO = { buka:true, biaya:25000, biayaEB:20000, batasEB:Date.parse('2026-11-30T23:59:00+07:00'), batasDaftar:Date.parse('2026-12-03T20:00:00+07:00'), jadwal:Date.parse('2026-12-04T07:30:00+07:00'), bank:'', rek:'', an:'', cp:'', waCP:'', now:Date.now() };
+let offset = 0, bukti = null;
+
+async function api(body){
+  const r = await fetch(API_URL, { method:'POST', body: JSON.stringify(body) });
+  if (!r.ok) throw new Error('Server tidak merespons (' + r.status + '). Coba lagi.');
+  const d = await r.json(); if (!d.ok) throw new Error(d.err || 'Terjadi kesalahan.'); return d;
+}
+const now = () => Date.now() + offset;
+const isEB = () => INFO.biayaEB && INFO.batasEB && now() <= INFO.batasEB;
+const harga = () => isEB() ? INFO.biayaEB : INFO.biaya;
+
+function paint(){
+  const eb = isEB(), j = wibParts(INFO.jadwal);
+  $('hDate').textContent = tgl(INFO.jadwal); $('hTime').textContent = j.jam + ' WIB'; $('dayTitle').textContent = `${j.h}, ${j.d} ${j.m.slice(0,3)} ${j.y}`;
+  [['pmNow','pmOld','pmTag'],['bNow','bOld','bTag']].forEach(([a,b,c], k) => {
+    $(a).textContent = rp(harga()); $(b).textContent = eb ? rp(INFO.biaya) : ''; $(b).hidden = !eb;
+    const e = wibParts(INFO.batasEB); $(c).hidden = !eb; $(c).textContent = k ? `Harga early bird sampai ${e.h}, ${e.d} ${e.m} ${e.y}` : `Early bird s.d. ${e.d} ${e.m.slice(0,3)}`;
+  });
+  $('pNom').textContent = rp(harga());
+  const c = wibParts(INFO.batasDaftar), ct = `Pendaftaran ditutup ${c.h}, ${c.d} ${c.m} ${c.y} pukul ${c.jam} WIB`;
+  $('closeNote').textContent = INFO.buka ? ct : 'Pendaftaran sudah ditutup'; $('bClose').textContent = $('closeNote').textContent;
+  const hasRek = !!(INFO.rek && INFO.bank);
+  $('payDetail').hidden = !hasRek; $('payWait').hidden = hasRek;
+  $('pBank').textContent = INFO.bank; $('pRek').textContent = INFO.rek; $('pAn').textContent = INFO.an || '-';
+  if (INFO.waCP){
+    const w = '62' + INFO.waCP.replace(/^0/, ''), href = `https://wa.me/${w}?text=${encodeURIComponent('Assalamu\'alaikum, saya ingin bertanya tentang Try Out Diagnostik SKD CPNS.')}`;
+    $('waFloat').href = href; $('waFloat').hidden = false;
+    $('footCp').innerHTML = `Narahubung: <a href="${href}" target="_blank" rel="noopener">${(INFO.cp ? INFO.cp + ' · ' : '')}${INFO.waCP}</a>`;
+  }
+  const closed = !INFO.buka;
+  $('rGo').disabled = closed || !hasRek; $('rGo').textContent = closed ? 'Pendaftaran sudah ditutup' : 'Kirim pendaftaran';
+}
+function tick(){
+  let s = Math.max(0, Math.floor((INFO.jadwal - now())/1000));
+  $('cdD').textContent = Math.floor(s/86400); s %= 86400;
+  $('cdH').textContent = String(Math.floor(s/3600)).padStart(2,'0'); s %= 3600;
+  $('cdM').textContent = String(Math.floor(s/60)).padStart(2,'0'); $('cdS').textContent = String(s%60).padStart(2,'0');
+}
+
+/* ---- bukti transfer: foto diperkecil agar unggahan ringan ---- */
+function readFile(f){
+  return new Promise((ok, no) => {
+    if (f.type === 'application/pdf'){ if (f.size > 6e6) return no(new Error('File PDF terlalu besar (maks. 6 MB).'));
+      const r = new FileReader(); r.onload = () => ok({ mime:'application/pdf', b64:String(r.result).split(',')[1], url:null }); r.onerror = no; r.readAsDataURL(f); return; }
+    if (!/^image\//.test(f.type)) return no(new Error('Pilih foto (JPG/PNG) atau PDF.'));
+    const img = new Image(), u = URL.createObjectURL(f);
+    img.onload = () => { const k = Math.min(1, 1600 / Math.max(img.width, img.height)), c = document.createElement('canvas');
+      c.width = Math.round(img.width*k); c.height = Math.round(img.height*k); const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0,0,c.width,c.height); x.drawImage(img, 0, 0, c.width, c.height);
+      const d = c.toDataURL('image/jpeg', .82); URL.revokeObjectURL(u); ok({ mime:'image/jpeg', b64:d.split(',')[1], url:d }); };
+    img.onerror = () => no(new Error('Foto tidak dapat dibaca. Coba tangkapan layar lain.')); img.src = u;
+  });
+}
+async function takeFile(f){
+  if (!f) return; err('');
+  try { bukti = await readFile(f); $('dropT').textContent = f.name; $('dropS').textContent = 'Ketuk untuk mengganti';
+    if (bukti.url){ $('prev').src = bukti.url; $('prev').hidden = false; } else $('prev').hidden = true; }
+  catch(e){ bukti = null; err(e.message); }
+}
+$('rBukti').onchange = e => takeFile(e.target.files[0]);
+['dragover','dragenter'].forEach(ev => $('drop').addEventListener(ev, e => { e.preventDefault(); $('drop').classList.add('over'); }));
+['dragleave','drop'].forEach(ev => $('drop').addEventListener(ev, e => { e.preventDefault(); $('drop').classList.remove('over'); if (ev === 'drop') takeFile(e.dataTransfer.files[0]); }));
+$('cpRek').onclick = async () => { try { await navigator.clipboard.writeText(INFO.rek.replace(/\s/g,'')); $('cpRek').textContent = 'Tersalin'; setTimeout(() => $('cpRek').textContent = 'Salin', 1600); } catch(e){} };
+
+function err(t){ $('rMsg').textContent = t; $('rMsg').hidden = !t; }
+$('regForm').addEventListener('submit', async e => {
+  e.preventDefault(); err('');
+  const nama = $('rNama').value.trim(), wa = $('rWa').value.replace(/\D/g,''), asal = $('rAsal').value.trim(), email = $('rEmail').value.trim();
+  if (nama.length < 3) return err('Isi nama lengkap Anda.');
+  if (wa.length < 10) return err('Isi nomor WhatsApp yang aktif.');
+  if (!asal) return err('Isi asal kota atau instansi.');
+  if (!bukti) return err('Unggah bukti transfer terlebih dahulu.');
+  if (!$('rAgree').checked) return err('Centang pernyataan terlebih dahulu.');
+  $('rGo').disabled = true; $('rGo').textContent = 'Mengirim…';
+  try {
+    const d = await api({ action:'daftar', nama, wa, asal, email, mime:bukti.mime, bukti:bukti.b64 });
+    $('regForm').hidden = true; $('regDone').hidden = false;
+    $('doneTxt').textContent = `${d.nama}, pendaftaran dengan nomor ${d.wa} dan tagihan ${rp(d.tagihan)} sudah kami terima. Panitia akan memverifikasi pembayaran dan memasukkan Anda ke grup WhatsApp peserta. Cek statusnya di bawah kapan saja.`;
+    if (INFO.waCP){ const w = '62' + INFO.waCP.replace(/^0/, '');
+      $('doneWa').href = `https://wa.me/${w}?text=${encodeURIComponent(`Assalamu'alaikum, saya ${d.nama} (${d.wa}) sudah mendaftar Try Out Diagnostik SKD CPNS dan mengunggah bukti transfer ${rp(d.tagihan)}. Mohon verifikasinya. Terima kasih.`)}`; $('doneWa').hidden = false; }
+    $('sWa').value = d.wa; $('regDone').scrollIntoView({ behavior:'smooth', block:'start' });
+  } catch(x){ err(x.message); }
+  finally { $('rGo').disabled = false; $('rGo').textContent = 'Kirim pendaftaran'; }
+});
+
+$('stForm').addEventListener('submit', async e => {
+  e.preventDefault(); const wa = $('sWa').value.replace(/\D/g,''), out = $('sRes');
+  if (wa.length < 10){ out.className = 'sres no'; out.textContent = 'Isi nomor WhatsApp yang terdaftar.'; return; }
+  $('sGo').disabled = true; out.className = 'sres'; out.textContent = 'Memeriksa…';
+  try { const d = await api({ action:'status', wa });
+    if (!d.terdaftar){ out.className = 'sres no'; out.textContent = 'Nomor ini belum terdaftar.'; }
+    else if (d.status === 'LUNAS'){ out.className = 'sres ok'; out.textContent = `✓ ${d.nama}: pembayaran terverifikasi. Anda terdaftar sebagai peserta try out.`; }
+    else { out.className = 'sres wait'; out.textContent = `${d.nama}: pendaftaran diterima, pembayaran sedang diverifikasi panitia.`; }
+  } catch(x){ out.className = 'sres no'; out.textContent = x.message; }
+  finally { $('sGo').disabled = false; }
+});
+
+(async function boot(){
+  paint(); tick(); setInterval(tick, 1000);
+  try { const d = await api({ action:'info' }); offset = d.now - Date.now(); Object.keys(d).forEach(k => { if (d[k] !== null && d[k] !== undefined) INFO[k] = d[k]; }); paint(); tick(); }
+  catch(e){ /* server lama: tampilkan nilai bawaan */ }
+})();
+</script>
+</body>
+</html>
