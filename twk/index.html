@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>CAT Latihan TWK CPNS</title>
+<title>CAT Latihan TWK & TKP CPNS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
@@ -211,6 +211,7 @@ h1{font-size:clamp(26px,4vw,36px);line-height:1.15;margin:0;font-weight:800;text
 .field input.tok{font-family:var(--f-num);font-weight:700;letter-spacing:.25em;text-transform:uppercase;font-size:20px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .plist{display:grid;gap:8px}
+.pgroup{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:6px}
 .pitem{display:flex;gap:12px;align-items:center;text-align:left;width:100%;padding:12px 14px;border-radius:11px;border:1.5px solid var(--line);background:var(--surface)}
 .pitem:hover{border-color:var(--brand)}
 .pitem.sel{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 8%,var(--surface))}
@@ -250,8 +251,8 @@ body.locked .exam,body.locked .result{-webkit-user-select:none;user-select:none;
 
 <header class="top">
   <div class="wrap">
-    <div class="mark" aria-hidden="true">TWK</div>
-    <div class="top-title"><b id="topTitle">Latihan TWK CPNS</b><span id="topSub">Pelatihan Persiapan Tes CPNS 2026</span></div>
+    <div class="mark" aria-hidden="true">CAT</div>
+    <div class="top-title"><b id="topTitle">Latihan TWK &amp; TKP CPNS</b><span id="topSub">Pelatihan Persiapan Tes CPNS 2026</span></div>
     <div class="timer" id="timer" hidden>00:00</div>
   </div>
 </header>
@@ -259,7 +260,7 @@ body.locked .exam,body.locked .result{-webkit-user-select:none;user-select:none;
 <main id="login" class="wrap login">
   <section class="intro" style="gap:16px">
     <div class="eyebrow">Pelatihan Persiapan Tes CPNS 2026</div>
-    <h1>Ujian Latihan TWK — Sistem CAT</h1>
+    <h1>Ujian Latihan TWK &amp; TKP — Sistem CAT</h1>
     <p class="lede">Masukkan data diri dan token dari pengawas. Hasil Anda langsung tercatat dan skor tampil setelah jawaban dikumpulkan.</p>
     <div class="lcard" style="gap:12px">
       <h2>Tata tertib ujian</h2>
@@ -268,7 +269,7 @@ body.locked .exam,body.locked .result{-webkit-user-select:none;user-select:none;
         <li>Layar ujian berjalan dalam <b>mode layar penuh</b>. Keluar dari layar penuh, berpindah tab, atau membuka aplikasi lain dihitung sebagai <b>pelanggaran</b>.</li>
         <li>Bila pelanggaran mencapai batas, jawaban <b>dikumpulkan otomatis</b> dengan status diskualifikasi.</li>
         <li>Salin, tempel, dan klik kanan dinonaktifkan. Nama Anda tampil samar di layar sebagai penanda.</li>
-        <li>Urutan soal setiap peserta berbeda. Penilaian: benar 5, salah atau kosong 0.</li>
+        <li>Urutan soal setiap peserta berbeda. Penilaian TWK: benar 5, salah atau kosong 0. Penilaian TKP: setiap pilihan bernilai 1–5, kosong 0.</li>
         <li>Waktu dihitung oleh server. Jawaban terkumpul otomatis saat waktu habis.</li>
       </ol>
     </div>
@@ -379,9 +380,11 @@ async function loadPaket(){
   try{
     const d = await api({ action:'paket' });
     PAKET = d.paket;
-    $('plist').innerHTML = PAKET.map(p => `<button type="button" class="pitem" role="radio" aria-checked="false" data-i="${p.i}"><span class="dot"></span>
+    let grp = '';
+    $('plist').innerHTML = PAKET.map(p => { const g = p.tipe === 'TKP' ? 'Tes Karakteristik Pribadi (TKP)' : 'Tes Wawasan Kebangsaan (TWK)';
+      const head = g !== grp ? `<div class="pgroup">${g}</div>` : ''; grp = g; return head + `<button type="button" class="pitem" role="radio" aria-checked="false" data-i="${p.i}"><span class="dot"></span>
       <span class="pt"><b>Paket ${p.i+1} · ${esc(p.title)}</b><span>${p.n} soal · ${p.menit} menit</span></span>
-      <span class="st ${p.buka ? 'open' : 'closed'}">${p.buka ? 'DIBUKA' : 'DITUTUP'}</span></button>`).join('');
+      <span class="st ${p.buka ? 'open' : 'closed'}">${p.buka ? 'DIBUKA' : 'DITUTUP'}</span></button>`; }).join('');
     $('plist').querySelectorAll('.pitem').forEach(b => b.onclick = () => {
       selPaket = +b.dataset.i;
       $('plist').querySelectorAll('.pitem').forEach(x => { x.classList.toggle('sel', x === b); x.setAttribute('aria-checked', x === b); });
@@ -503,45 +506,47 @@ async function submit(alasan){
 
 /* ---------------- hasil ---------------- */
 function renderResult(filter){
-  const R = S.result, n = S.items.length, pct = Math.round(R.benar / n * 100), C = 2*Math.PI*52;
+  const R = S.result, n = S.items.length, tkp = R.tipe === 'TKP', pct = Math.round(R.skor / R.maks * 100), C = 2*Math.PI*52;
   const dur = `${Math.floor(R.durasi/60)} menit ${R.durasi%60} detik`;
   const verdict = pct >= 80 ? 'Sangat baik' : pct >= 65 ? 'Baik' : pct >= 50 ? 'Cukup, terus berlatih' : 'Perlu banyak latihan';
   const stTxt = { 'SELESAI':'', 'WAKTU HABIS':'Waktu habis', 'DISKUALIFIKASI':'Diskualifikasi pelanggaran', 'TERLAMBAT KIRIM':'Terlambat kirim' }[R.status] ?? R.status;
-  const secs = R.perBagian.map(b => `<div class="secrow"><span>${esc(b.nama)}</span><div class="bar"><i style="width:${b.benar/b.total*100}%"></i></div><span class="n">${b.benar}/${b.total}</span></div>`).join('');
+  const secs = R.perBagian.map(b => tkp ? `<div class="secrow"><span>${esc(b.nama)}</span><div class="bar"><i style="width:${b.poin/b.maksPoin*100}%"></i></div><span class="n">${b.poin}/${b.maksPoin}</span></div>` : `<div class="secrow"><span>${esc(b.nama)}</span><div class="bar"><i style="width:${b.benar/b.total*100}%"></i></div><span class="n">${b.benar}/${b.total}</span></div>`).join('');
   let review = '';
   if (R.tampilKunci){
     const st = S.items.map(q => !R.ans[q.id] ? 'sk' : R.ans[q.id] === R.kunci[q.id] ? 'ok' : 'bad');
     const shown = S.items.map((q,i) => i).filter(i => filter==='all' || (filter==='ok' && st[i]==='ok') || (filter==='wrong' && st[i]!=='ok'));
     const ok = st.filter(x => x==='ok').length;
-    review = `<section class="panel"><h3>Jawaban benar dan pembahasan</h3>
+    review = `<section class="panel"><h3>${tkp ? 'Skor tiap pilihan dan pembahasan' : 'Jawaban benar dan pembahasan'}</h3>
       <div class="filters"><button class="fbtn ${filter==='all'?'on':''}" data-f="all" type="button">Semua (${n})</button>
-      <button class="fbtn ${filter==='wrong'?'on':''}" data-f="wrong" type="button">Salah &amp; kosong (${n-ok})</button>
-      <button class="fbtn ${filter==='ok'?'on':''}" data-f="ok" type="button">Benar (${ok})</button></div>
+      <button class="fbtn ${filter==='wrong'?'on':''}" data-f="wrong" type="button">${tkp ? 'Belum skor 5' : 'Salah &amp; kosong'} (${n-ok})</button>
+      <button class="fbtn ${filter==='ok'?'on':''}" data-f="ok" type="button">${tkp ? 'Skor 5' : 'Benar'} (${ok})</button></div>
       <div class="rlist">${shown.length ? shown.map(i => {
         const q = S.items[i], my = R.ans[q.id], key = R.kunci[q.id];
-        const badge = st[i]==='ok' ? '<span class="badge ok">✓ Benar · +5</span>' : st[i]==='bad' ? '<span class="badge bad">✗ Salah · 0</span>' : '<span class="badge sk">Tidak dijawab · 0</span>';
+        const so = tkp ? R.skorOpsi[q.id] : null, mySc = so && my ? so[L.indexOf(my)] : 0;
+        const badge = tkp ? (my ? `<span class="badge ${mySc===5?'ok':mySc>=3?'sk':'bad'}">Skor Anda: ${mySc}</span>` : '<span class="badge sk">Tidak dijawab · 0</span>')
+          : st[i]==='ok' ? '<span class="badge ok">✓ Benar · +5</span>' : st[i]==='bad' ? '<span class="badge bad">✗ Salah · 0</span>' : '<span class="badge sk">Tidak dijawab · 0</span>';
         const opts = q.opts.map((o,k) => { const l = L[k], cls = l===key ? 'key' : (l===my ? 'wrong' : '');
-          const tag = l===key && l===my ? 'Jawaban Anda · benar' : l===key ? 'Kunci jawaban' : l===my ? 'Jawaban Anda' : '';
+          const tag = tkp ? (l===my ? `Jawaban Anda · skor ${so[k]}` : `Skor ${so[k]}`) : l===key && l===my ? 'Jawaban Anda · benar' : l===key ? 'Kunci jawaban' : l===my ? 'Jawaban Anda' : '';
           return `<div class="ro ${cls}"><span class="l">${l}.</span><span class="t">${esc(o)}</span>${tag ? `<span class="tag">${tag}</span>` : ''}</div>`; }).join('');
         return `<article class="ritem"><div class="rtop"><span class="qno">SOAL ${i+1} · <span class="sec">${esc(S.sections[q.sec])}</span></span>${badge}</div>
-          ${qBody(q)}<div class="ropts">${opts}</div><div class="pemb"><b>Pembahasan (kunci ${key}).</b> ${esc(R.pemb[q.id])}</div></article>`;
+          ${qBody(q)}<div class="ropts">${opts}</div><div class="pemb"><b>Pembahasan (${tkp ? 'skor 5: ' : 'kunci '}${key}).</b> ${esc(R.pemb[q.id])}</div></article>`;
       }).join('') : '<p class="empty">Tidak ada soal pada kategori ini.</p>'}</div></section>`;
   } else review = `<section class="panel"><h3>Kunci jawaban</h3><p class="empty">Kunci jawaban dan pembahasan akan dibahas bersama pemateri.</p></section>`;
   $('result').innerHTML = `
     <section class="score">
-      <div class="ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="11"/><circle cx="60" cy="60" r="52" fill="none" stroke="#C9962B" stroke-width="11" stroke-linecap="round" stroke-dasharray="${C*R.benar/n} ${C}"/></svg>
+      <div class="ring" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="11"/><circle cx="60" cy="60" r="52" fill="none" stroke="#C9962B" stroke-width="11" stroke-linecap="round" stroke-dasharray="${C*R.skor/R.maks} ${C}"/></svg>
         <div class="v"><b>${R.skor}</b><span>dari ${R.maks}</span></div></div>
       <div>
         <h2>Skor Paket ${S.paket+1}: ${esc(S.title)}${stTxt ? `<span class="stbadge">${esc(stTxt)}</span>` : ''}</h2>
-        <p class="who">${esc(S.nama)} · ${verdict} (${pct}% benar) · waktu ${dur}${R.pelanggaran ? ` · ${R.pelanggaran} pelanggaran` : ''}</p>
-        <div class="kpis"><div class="kpi ok"><b>${R.benar}</b><span>Benar</span></div><div class="kpi bad"><b>${R.salah}</b><span>Salah</span></div><div class="kpi sk"><b>${R.kosong}</b><span>Tidak dijawab</span></div><div class="kpi"><b>${R.skor}</b><span>Skor (benar × 5)</span></div></div>
+        <p class="who">${esc(S.nama)} · ${verdict} (${pct}% ${tkp ? 'dari skor maksimum' : 'benar'}) · waktu ${dur}${R.pelanggaran ? ` · ${R.pelanggaran} pelanggaran` : ''}</p>
+        ${tkp ? `<div class="kpis"><div class="kpi ok"><b>${R.benar}</b><span>Pilihan skor 5</span></div><div class="kpi bad"><b>${R.salah}</b><span>Skor 1–4</span></div><div class="kpi sk"><b>${R.kosong}</b><span>Tidak dijawab</span></div><div class="kpi"><b>${R.skor}</b><span>Total skor (1–5 per soal)</span></div></div>` : `<div class="kpis"><div class="kpi ok"><b>${R.benar}</b><span>Benar</span></div><div class="kpi bad"><b>${R.salah}</b><span>Salah</span></div><div class="kpi sk"><b>${R.kosong}</b><span>Tidak dijawab</span></div><div class="kpi"><b>${R.skor}</b><span>Skor (benar × 5)</span></div></div>`}
       </div>
     </section>
     <section class="panel"><h3>Hasil per bagian</h3>${secs}<p class="hint">Hasil ini sudah tercatat di rekap pengawas.</p></section>
     ${review}
     <div class="racts"><button class="btn primary" type="button" id="doneBtn">Selesai, kembali ke halaman masuk</button></div>`;
   $('result').querySelectorAll('.fbtn').forEach(b => b.onclick = () => { renderResult(b.dataset.f); $('result').querySelector('.filters').scrollIntoView({block:'start'}); });
-  $('doneBtn').onclick = () => { clearState(); S = null; $('wm').hidden = true; $('fTok').value = ''; $('fAgree').checked = false; $('topTitle').textContent = 'Latihan TWK CPNS'; $('topSub').textContent = 'Pelatihan Persiapan Tes CPNS 2026'; show('login'); loadPaket(); };
+  $('doneBtn').onclick = () => { clearState(); S = null; $('wm').hidden = true; $('fTok').value = ''; $('fAgree').checked = false; $('topTitle').textContent = 'Latihan TWK & TKP CPNS'; $('topSub').textContent = 'Pelatihan Persiapan Tes CPNS 2026'; show('login'); loadPaket(); };
   $('topTitle').textContent = `Hasil Paket ${S.paket+1} · ${S.title}`; $('topSub').textContent = S.nama;
   show('result');
 }
