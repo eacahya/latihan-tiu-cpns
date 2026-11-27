@@ -288,7 +288,7 @@ body.locked .exam,body.locked .result{-webkit-user-select:none;user-select:none;
         <li>Bila pelanggaran mencapai batas, jawaban <b>dikumpulkan otomatis</b> dengan status diskualifikasi.</li>
         <li>Salin, tempel, dan klik kanan dinonaktifkan. Nama Anda tampil samar di layar sebagai penanda.</li>
         <li>Urutan soal setiap peserta berbeda. Penilaian TWK dan TIU: benar 5, salah atau kosong 0. Penilaian TKP: setiap pilihan bernilai 1–5, kosong 0.</li>
-        <li>Ambang batas: <b>TWK 65</b>, <b>TIU 80</b>, <b>TKP 156</b>. Anda dinyatakan memenuhi ambang batas bila ketiganya tercapai.</li>
+        <li>Ambang batas: <b>TWK 65</b>, <b>TIU 80</b>, <b>TKP 166</b>. Anda dinyatakan memenuhi ambang batas bila ketiganya tercapai.</li>
         <li>Waktu dihitung oleh server. Jawaban terkumpul otomatis saat waktu habis.</li>
       </ol>
     </div>
@@ -361,7 +361,7 @@ async function api(body){
   if (!d.ok) throw new Error(d.err || 'Terjadi kesalahan.');
   return d;
 }
-async function loadFig(){ if (FIG) return FIG; const r = await fetch('../figur.json'); FIG = await r.json(); return FIG; }
+async function loadFig(){ if (FIG) return FIG; const r = await fetch('figur.json'); FIG = await r.json(); return FIG; }
 const now = () => Date.now() + (S ? S.offset : 0);
 
 /* ---------------- layar penuh & pengawasan ---------------- */
@@ -569,7 +569,7 @@ function renderResult(filter){
       </div>
     </section>
     <section class="panel"><h3>Nilai per subtes</h3><div class="subts">${subtes}</div>
-      <p class="hint">Ambang batas: TWK 65, TIU 80, TKP 156 (KepmenPANRB 2026 untuk SKD sekolah kedinasan). Kelulusan SKD mensyaratkan ketiga subtes memenuhi ambang batas.</p></section>
+      <p class="hint">Ambang batas SKD CPNS 2026: TWK 65, TIU 80, TKP 166 (KepmenPANRB Nomor 674 Tahun 2026). Kelulusan SKD mensyaratkan ketiga subtes memenuhi ambang batas.</p></section>
     <section class="panel"><h3>Capaian per aspek</h3>${aspek}</section>
     <section class="panel pdfbox"><div><h3>Laporan PDF</h3><p class="hint">Berisi identitas, nilai per subtes dan aspek, kesimpulan ambang batas${R.tampilKunci ? `, serta pembahasan singkat seluruh ${n} soal` : ''}.</p></div>
       <button class="btn primary big" id="pdfBtn" type="button">Unduh laporan PDF</button><div id="pdfMsg" class="hint"></div></section>
@@ -685,7 +685,7 @@ async function buildPDF(){
   table([{ label: 'Subtes', w: 175 }, { label: 'Soal', w: 38, align: 'c' }, { label: 'Benar*', w: 50, align: 'c' }, { label: 'Kosong', w: 48, align: 'c' }, { label: 'Skor', w: 46, align: 'c' }, { label: 'Ambang', w: 50, align: 'c' }, { label: 'Status', w: CW - 407, align: 'c' }],
     R.perBagian.map(b => { const kos = R.perAspek.filter(a => a.sec === b.kode).reduce((s, a) => s + a.kosong, 0);
       return { cells: [b.nama, String(b.total), String(b.benar), String(kos), `${b.poin}/${b.maksPoin}`, String(b.ambang), b.lulus ? 'MEMENUHI' : 'BELUM'], colors: [null, null, null, null, null, null, b.lulus ? K.ok : K.bad] }; }));
-  para('*Untuk TKP, kolom Benar berarti jumlah pilihan bernilai 5. Penilaian TWK dan TIU: benar 5, salah atau kosong 0. Penilaian TKP: setiap pilihan bernilai 1–5, kosong 0. Ambang batas mengacu pada KepmenPANRB 2026 tentang nilai ambang batas SKD sekolah kedinasan; selalu cek ketentuan resmi pada tahun seleksi.', { sz: 7.8, color: K.muted, f: FI });
+  para('*Untuk TKP, kolom Benar berarti jumlah pilihan bernilai 5. Penilaian TWK dan TIU: benar 5, salah atau kosong 0. Penilaian TKP: setiap pilihan bernilai 1–5, kosong 0. Ambang batas dan kisi-kisi mengacu pada KepmenPANRB Nomor 674 Tahun 2026 tentang mekanisme seleksi PNS dan nilai ambang batas SKD.', { sz: 7.8, color: K.muted, f: FI });
 
   heading('2. Capaian per aspek');
   table([{ label: 'Subtes', w: 48 }, { label: 'Aspek', w: 135 }, { label: 'Soal', w: 38, align: 'c' }, { label: 'Benar*', w: 48, align: 'c' }, { label: 'Salah', w: 42, align: 'c' }, { label: 'Kosong', w: 46, align: 'c' }, { label: 'Skor', w: 56, align: 'c' }, { label: 'Capaian', w: CW - 413, align: 'c' }],
